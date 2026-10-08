@@ -328,362 +328,470 @@ const LABS_DATA = [
 ];
 
 // =============================================================================
-// 2. DATA REPOSITORY: 22 SCHOOL FACULTY & STAFF PROFILES
+// 2. DATA REPOSITORY: 21 SCHOOL FACULTY & STAFF PROFILES (AUTHENTIC DATA)
 // =============================================================================
 const STAFF_DATA = [
   {
     id: 1,
-    name: 'Shri. Anil P. Deshmukh',
-    nameMr: 'श्री. अनिल प्र. देशमुख',
-    role: 'Headmaster & Science Teacher',
-    roleMr: 'मुख्याध्यापक व विज्ञान शिक्षक',
+    name: "Shri. Anil P. Deshmukh",
+    nameMr: "श्री. अनिल प्र. देशमुख",
+    role: "Headmaster & Science Teacher",
+    roleMr: "मुख्याध्यापक व विज्ञान शिक्षक",
     dept: 'leadership',
-    deptName: 'Leadership & Science',
-    subject: 'General Science & Administration',
-    subjectMr: "प्रशासन, संस्थात्मक नेतृत्व व गणित",
-    qual: 'B.Sc., B.Ed. | 25+ Years Dedicated Service',
-    awards: 'Recipient of District Best Teacher & State Commendation',
+    deptName: "Leadership & Administration",
+    deptNameMr: "प्रशासन व नेतृत्व",
+    subject: "General Science & Institutional Leadership",
+    subjectMr: "सामान्य विज्ञान, संस्थात्मक नेतृत्व व प्रशासन",
+    qual: "B.Sc., B.Ed. | 25+ Years Dedicated Service",
+    awards: "Recipient of District Best Teacher & State Commendation",
     photo: 'images/hm-anil-deshmukh.jpg',
+    initials: 'AD',
     isHM: true,
     phone: '+91 9226966376',
-    bio: 'Visionary leader steering Ganori Prashala into Maharashtra’s flagship PM SHRI school with state-first AI Lab, 700-tree dense forest, and national accolades.'
+    email: 'wirangula@gmail.com',
+    dob: '11/06/1971',
+    bio: "Visionary leader steering Ganori Prashala into Maharashtra’s flagship PM SHRI school with state-first school AI Lab, 10 advanced laboratories, 700-tree dense forest, and national level milestones in science.",
+    bioMr: "गणोरी प्रशालेचे प्रेरणादायी नेतृत्व. त्यांच्या दूरदृष्टीतून प्रशालेत महाराष्ट्रातील पहिली शालेय AI लॅब, १० आधुनिक प्रयोगशाळा, इस्रो दौरा, ५३ वर्षांतील राष्ट्रीय विज्ञान यश आणि ७०० झाडांचे घनदाट अरण्य साकारले आहे."
   },
   {
     id: 2,
-    name: 'Smt. Suvarna Deshmukh',
-    nameMr: 'श्रीमती सुवर्णा देशमुख',
-    role: 'Senior Mathematics Teacher',
-    roleMr: 'गणित शिक्षिका',
+    name: "Smt. Suvarna Dattatray Deshmukh",
+    nameMr: "श्रीमती सुवर्णा दत्तात्रय देशमुख",
+    role: "Secondary Teacher (Mathematics)",
+    roleMr: "माध्यमिक शिक्षिका (गणित)",
     dept: 'stem',
-    deptName: 'Science & Mathematics',
-    subject: 'Secondary Mathematics & Algebra',
-    subjectMr: "भौतिकशास्त्र, AI व खगोलशास्त्र",
-    qual: 'M.Sc., B.Ed.',
-    awards: 'Guided 500+ Student-Made Math Lab Models',
-    photo: null,
+    deptName: "Science & Mathematics",
+    deptNameMr: "विज्ञान व गणित",
+    subject: "Secondary Mathematics & Geometry",
+    subjectMr: "माध्यमिक गणित व भूमिती",
+    qual: "M.Sc., B.Ed.",
+    awards: "Guided 500+ Student-Made Math Lab Models",
+    photo: 'images/teacher-suvarna-deshmukh.jpg',
     initials: 'SD',
     isHM: false,
-    bio: 'Pioneer of the student-crafted Math Lab models and mentor for national science exhibition participants.'
+    phone: '+91 9834541530',
+    email: 'suvarna.deshmukh21@gmail.com',
+    dob: '23/10/1971',
+    bio: "Pioneer of Ganori Prashala's student-crafted Mathematics Laboratory featuring 500+ interactive wooden and acrylic learning models that make complex algebra and geometry intuitive.",
+    bioMr: "गणित प्रयोगशाळेच्या शिल्पकार. ५०० हून अधिक स्वनिर्मित गणितीय साहित्यांच्या साहाय्याने बीजगणित व भूमिती सोप्या व रंजक पद्धतीने शिकवण्यामध्ये विशेष हातखंडा."
   },
   {
     id: 3,
-    name: 'Shri. Nayansingh Pardeshi',
-    nameMr: 'श्री. नयननसिंग परदेशी',
-    role: 'Social Science Teacher',
-    roleMr: 'सामाजिक शास्त्र शिक्षक',
-    dept: 'humanities',
-    deptName: 'Social Sciences',
-    subject: 'History, Civics & Geography',
+    name: "Shri. Digambar Eknathrao Dapke",
+    nameMr: "श्री. दिगंबर एकनाथराव दापके",
+    role: "Graduate Teacher (Mathematics)",
+    roleMr: "पदवीधर शिक्षक (गणित)",
+    dept: 'stem',
+    deptName: "Science & Mathematics",
+    deptNameMr: "विज्ञान व गणित",
+    subject: "Mathematics & Algebra",
     subjectMr: "माध्यमिक गणित व वैदिक गणित",
-    qual: 'M.A., B.Ed.',
-    awards: 'Student Parliament & Heritage Club Mentor',
+    qual: "M.Sc., B.Ed.",
+    awards: "Competitive Exam & NMMS Math Guidance Incharge",
     photo: null,
-    initials: 'NP',
-    bio: 'Fosters civic consciousness, mock parliament debates, and local historical exploration among secondary students.'
+    initials: 'DD',
+    isHM: false,
+    phone: '+91 9423679740',
+    email: 'digambar1189@gmail.com',
+    dob: '01/01/1989',
+    bio: "Dynamic mathematics educator specializing in conceptual problem solving, NMMS scholarship coaching, Vedic math techniques, and digital arithmetic modules.",
+    bioMr: "उत्साही गणित शिक्षक. NMMS शिष्यवृत्ती परीक्षा, स्पर्धा परीक्षा मार्गदर्शन आणि वैदिक गणिताच्या प्रभावी तंत्रांद्वारे विद्यार्थ्यांची गणित विषयातील आवड वाढवण्यात अग्रेसर."
   },
   {
     id: 4,
-    name: 'Smt. S. D. Taikwade',
-    nameMr: 'श्रीमती एस. डी. ताईकवाडे',
-    role: 'Science Teacher',
-    roleMr: 'विज्ञान शिक्षिका',
+    name: "Shri. Krishna Jaiswal",
+    nameMr: "श्री. कृष्णा जयस्वाल",
+    role: "Graduate Teacher (Science)",
+    roleMr: "पदवीधर शिक्षक (विज्ञान)",
     dept: 'stem',
-    deptName: 'Science & Mathematics',
-    subject: 'General Science & Biology',
-    subjectMr: "सामान्य विज्ञान व पर्यावरण शिक्षण",
-    qual: 'B.Sc., B.Ed.',
-    awards: 'Eco-Club & Swachhata Campaign Lead',
+    deptName: "Science & Innovation",
+    deptNameMr: "विज्ञान व गणित",
+    subject: "General Science & Physics",
+    subjectMr: "सामान्य विज्ञान व भौतिकशास्त्र",
+    qual: "B.Sc., B.Ed.",
+    awards: "District & State Science Exhibition Mentor",
     photo: null,
-    initials: 'ST',
-    bio: 'Dedicated science educator driving environmental sustainability, eco-friendly projects, and laboratory experiments.'
+    initials: 'KJ',
+    isHM: false,
+    phone: '+91 9423150141',
+    email: 'krishnajaiswal0141@gmail.com',
+    dob: '12/06/1984',
+    bio: "Passionate science educator guiding students in hands-on physics experiments, working STEM models, astronomy exploration, and state-level science exhibitions.",
+    bioMr: "प्रयोगशील विज्ञान शिक्षक. विद्यार्थ्यांना प्रत्यक्ष प्रयोगांद्वारे भौतिकशास्त्र शिकवणे, विज्ञान प्रदर्शनांसाठी मॉडेल तयार करणे आणि खगोलशास्त्र उपक्रमांमध्ये सक्रिय मार्गदर्शन."
   },
   {
     id: 5,
-    name: 'Shri. Arvind Sathans',
-    nameMr: 'श्री. अरविंद सातहंस',
-    role: 'Social Science Teacher',
-    roleMr: 'सामाजिक शास्त्र शिक्षक',
-    dept: 'humanities',
-    deptName: 'Social Sciences',
-    subject: 'Geography & Environmental Studies',
-    subjectMr: "भूगोल व पर्यावरण अभ्यास",
-    qual: 'B.A., B.Ed.',
-    awards: 'Harit Vidyalaya Drip Irrigation Coordinator',
+    name: "Smt. Savita Narhari Barsagade",
+    nameMr: "श्रीमती सविता नरहरी बारसागडे",
+    role: "Graduate Teacher (Science)",
+    roleMr: "पदवीधर शिक्षिका (विज्ञान)",
+    dept: 'stem',
+    deptName: "Science & Innovation",
+    deptNameMr: "विज्ञान व गणित",
+    subject: "Science & Biological Studies",
+    subjectMr: "विज्ञान, पर्यावरण अभ्यास व जीवशास्त्र",
+    qual: "M.Sc., B.Ed.",
+    awards: "INSPIRE MANAK Award Guidance & Eco-Club Mentor",
     photo: null,
-    initials: 'AS',
-    bio: 'Champion of the 700-tree dense forest initiative and geography field studies around the Phulambri region.'
+    initials: 'SB',
+    isHM: false,
+    phone: '+91 8275815563',
+    email: 'savitabarsagade13@gmail.com',
+    dob: '13/12/1991',
+    bio: "Dedicated science educator driving environmental awareness, biological observations, laboratory practicals, and guiding young scientists for INSPIRE MANAK awards.",
+    bioMr: "पर्यावरण, वनस्पती व जीवशास्त्र विषयातील तज्ज्ञ मार्गदर्शिका. इन्स्पायर अवॉर्ड स्पर्धा, प्रयोगशाळा कार्य आणि विद्यार्थ्यांमध्ये वैज्ञानिक दृष्टिकोन रुजवण्यासाठी कार्यरत."
   },
   {
     id: 6,
-    name: 'Smt. S. N. Bavarekar',
-    nameMr: 'श्रीमती एस. एन. बावरेकर',
-    role: 'Social Science Teacher',
-    roleMr: 'सामाजिक शास्त्र शिक्षिका',
-    dept: 'humanities',
-    deptName: 'Social Sciences',
-    subject: 'History & Political Science',
-    subjectMr: "इतिहास व राज्यशास्त्र",
-    qual: 'M.A., B.Ed.',
-    awards: 'Constitution Day & Cultural Quiz Lead',
+    name: "Smt. Shailaja Devidas Naikwade",
+    nameMr: "श्रीमती शैलजा देवीदास नाईकवाडे",
+    role: "High School Teacher (Science)",
+    roleMr: "माध्यमिक शिक्षिका (विज्ञान)",
+    dept: 'stem',
+    deptName: "Science & Innovation",
+    deptNameMr: "विज्ञान व गणित",
+    subject: "Secondary Science & Chemistry",
+    subjectMr: "सामान्य विज्ञान व रसायनशास्त्र",
+    qual: "B.Sc., B.Ed.",
+    awards: "Eco-Club & Swachhata Campaign Coordinator",
     photo: null,
-    initials: 'SB',
-    bio: 'Instills deep appreciation for Maharashtra’s vibrant history, Chhatrapati Shivaji Maharaj’s ideals, and constitutional values.'
+    initials: 'SN',
+    isHM: false,
+    phone: '+91 8275323939',
+    email: 'shailajanaikwade1212@gmail.com',
+    dob: '12/12/1975',
+    bio: "Experienced science teacher passionate about experimental chemistry, nature preservation, Swachhata campaigns, and making science relatable to rural daily life.",
+    bioMr: "अनुभवी विज्ञान शिक्षिका. रसायनशास्त्र प्रयोग, परिसर स्वच्छता अभियान, जलसंवर्धन प्रकल्प आणि ग्रामीण जीवनातील विज्ञानाचे महत्त्व विद्यार्थ्यांना प्रभावीपणे पटवून देतात."
   },
   {
     id: 7,
-    name: 'Shri. Suresh Thakur',
-    nameMr: 'श्री. सुरेश ठाकूर',
-    role: 'Language Teacher (Marathi / Hindi)',
-    roleMr: 'भाषा शिक्षक (मराठी/हिंदी)',
-    dept: 'humanities',
-    deptName: 'Languages',
-    subject: 'Marathi Literature & Hindi',
-    subjectMr: "मराठी साहित्य व हिंदी",
-    qual: 'M.A. (Marathi), B.Ed.',
-    awards: 'Street Play & Elocution Coach',
+    name: "Shri. Dnyaneshwar Pandurang Surase",
+    nameMr: "श्री. ज्ञानेश्वर पांडुरंग सुरासे",
+    role: "Upper Primary Teacher (UGT - Mathematics)",
+    roleMr: "उच्च प्राथमिक शिक्षक (गणित)",
+    dept: 'stem',
+    deptName: "Upper Primary & Mathematics",
+    deptNameMr: "विज्ञान व गणित",
+    subject: "Upper Primary Mathematics (Class 5th & 6th)",
+    subjectMr: "पायाभूत गणित व अंकगणित (इ. ५ वी व ६ वी)",
+    qual: "H.S.C., D.Ed.",
+    awards: "FLN Numeracy & Foundational Learning Lead",
     photo: null,
-    initials: 'ST',
-    bio: 'Renowned playwright directing students in powerful street plays addressing superstition, literacy, and social evils.'
+    initials: 'DS',
+    isHM: false,
+    phone: '+91 9561909361',
+    email: 'dpsurase4@gmail.com',
+    dob: '10/03/1971',
+    bio: "Specialist in building rock-solid mathematical fundamentals for 5th and 6th-grade students using interactive games, mental arithmetic drills, and joyful pedagogy.",
+    bioMr: "इयत्ता ५ वी व ६ वीच्या विद्यार्थ्यांसाठी पायाभूत गणित (FLN) साध्य करणारे समर्पित शिक्षक. खेळांमधून गणित, पाढे पाठांतर व मनोरंजक अंकगणिताचे तज्ज्ञ."
   },
   {
     id: 8,
-    name: 'Shri. Rameshwar Nahat',
-    nameMr: 'श्री. रामेश्वर नाहात',
-    role: 'English Language Teacher',
-    roleMr: 'इंग्रजी शिक्षक',
+    name: "Shri. Suresh Adhar Thakur",
+    nameMr: "श्री. सुरेश आधार ठाकूर",
+    role: "Secondary Teacher (Marathi)",
+    roleMr: "माध्यमिक शिक्षक (मराठी)",
     dept: 'humanities',
-    deptName: 'Languages',
-    subject: 'English Communication & Grammar',
-    subjectMr: "इंग्रजी संभाषण व व्याकरण",
-    qual: 'M.A. (English), B.Ed.',
-    awards: 'Language Lab & Spoken English Incharge',
+    deptName: "Languages & Literature",
+    deptNameMr: "भाषा व सामाजिक शास्त्रे",
+    subject: "Marathi Language & Literature",
+    subjectMr: "मराठी भाषा, साहित्य व व्याकरण",
+    qual: "M.A. (Marathi), B.Ed.",
+    awards: "Street Play Director & Elocution Coach",
     photo: null,
-    initials: 'RN',
-    bio: 'Bridges the rural-urban language divide through interactive digital phonetics and daily conversational drills.'
+    initials: 'ST',
+    isHM: false,
+    phone: '+91 9850866764',
+    email: 'sathakur1972@gmail.com',
+    dob: '01/07/1972',
+    bio: "Celebrated Marathi language mentor and playwright directing students in powerful street plays addressing superstition, education, tree conservation, and social reform.",
+    bioMr: "मराठी भाषा व साहित्याचे व्यासंगी शिक्षक आणि नाट्य दिग्दर्शक. व्यसनमुक्ती, अंधश्रद्धा निर्मूलन व शिक्षण प्रसारावर आधारित विद्यार्थ्यांची गाजलेली पथनाट्ये दिग्दर्शित करतात."
   },
   {
     id: 9,
-    name: 'Shri. Rajendra Jagtap',
-    nameMr: 'श्री. राजेंद्र जगताप',
-    role: 'Physical Education & Sports Teacher',
-    roleMr: 'क्रीडा शिक्षक',
-    dept: 'primary-sports',
-    deptName: 'Physical Education & Sports',
-    subject: 'Physical Education, Athletics & Lezim',
-    subjectMr: "क्रीडा, योग व शारीरिक आरोग्य",
-    qual: 'B.P.Ed., M.P.Ed.',
-    awards: 'District Level Lezim & Kabaddi Champions',
+    name: "Shri. Nagrajsing Nandulal Pardeshi",
+    nameMr: "श्री. नागराजसिंग नंदुलाल परदेशी",
+    role: "Secondary Teacher (Hindi)",
+    roleMr: "माध्यमिक शिक्षक (हिंदी)",
+    dept: 'humanities',
+    deptName: "Languages",
+    deptNameMr: "भाषा व सामाजिक शास्त्रे",
+    subject: "Hindi Language & Literature",
+    subjectMr: "राष्ट्रभाषा हिंदी व साहित्य",
+    qual: "M.A. (Hindi), B.Ed.",
+    awards: "Rashtrabhasha Hindi Exams & Cultural Lead",
     photo: null,
-    initials: 'RJ',
-    bio: 'Trains school teams in traditional Lezim, volleyball, kho-kho, kabaddi, and athletic track events.'
+    initials: 'NP',
+    isHM: false,
+    phone: '+91 8600744040',
+    email: 'nagrajpardeshi162@gmail.com',
+    dob: '27/01/1972',
+    bio: "Enthusiastic Hindi educator instilling fluency and literary expression, organizing Rashtrabhasha exams, student poetry assemblies, and cultural presentations.",
+    bioMr: "राष्ट्रभाषा हिंदीचे अनुभवी शिक्षक. राष्ट्रभाषा प्रचार सभा परीक्षा, वक्तृत्व, काव्यवाचन आणि सांस्कृतिक कार्यक्रमांचे यशस्वी आयोजन व मार्गदर्शन."
   },
   {
     id: 10,
-    name: 'Smt. B. V. Thakre',
-    nameMr: 'श्रीमती बी. व्ही. ठाकरे',
-    role: 'Drawing & Fine Arts Teacher',
-    roleMr: 'चित्रकला शिक्षिका',
-    dept: 'primary-sports',
-    deptName: 'Arts & Aesthetics',
-    subject: 'Fine Arts, Warli Painting & Sculpting',
-    subjectMr: "NSQF ऑटोमोबाईल टेक्नॉलॉजी",
-    qual: 'A.T.D. (Art Teacher Diploma), A.M.',
-    awards: 'District Grade Exam Gold Mentor',
+    name: "Smt. Kalpana Narsing Singhal",
+    nameMr: "श्रीमती कल्पना नरसिंग सिंघल",
+    role: "Graduate Teacher (English)",
+    roleMr: "पदवीधर शिक्षिका (इंग्रजी)",
+    dept: 'humanities',
+    deptName: "Languages",
+    deptNameMr: "भाषा व सामाजिक शास्त्रे",
+    subject: "English Language & Grammar",
+    subjectMr: "इंग्रजी संभाषण, व्याकरण व साहित्य",
+    qual: "M.A. (English), B.Ed.",
+    awards: "Digital Language Lab & Spoken English Incharge",
     photo: null,
-    initials: 'BT',
-    bio: 'Master artist responsible for school BALA wall aesthetics, terracotta Warli pot painting, and Shaadu clay sculpting.'
+    initials: 'KS',
+    isHM: false,
+    phone: '+91 9421301560',
+    email: 'kalpanasingal1984@gmail.com',
+    dob: '18/05/1984',
+    bio: "Empowers rural students with strong English conversational skills, digital phonetics practice, grammar fundamentals, and confidence in public speaking.",
+    bioMr: "ग्रामीण विद्यार्थ्यांना इंग्रजी संभाषणामध्ये पारंगत करणाऱ्या कुशल शिक्षिका. डिजिटल लँग्वेज लॅबद्वारे फोनोटिक्स, संवाद कौशल्य व व्याकरणाचा दैनंदिन सराव."
   },
   {
     id: 11,
-    name: 'Smt. Sulabha Phalshikar',
-    nameMr: 'श्रीमती सुलभा फलशीकर',
-    role: 'Language Teacher',
-    roleMr: 'भाषा शिक्षिका',
+    name: "Shri. Rameshwar Sandu Jadhav",
+    nameMr: "श्री. रामेश्वर संदू जाधव",
+    role: "Secondary Teacher (English)",
+    roleMr: "माध्यमिक शिक्षक (इंग्रजी)",
     dept: 'humanities',
-    deptName: 'Languages',
-    subject: 'Language & Literature',
-    subjectMr: "NSQF MSFC, वेल्डिंग व वायरिंग",
-    qual: 'B.A., B.Ed.',
-    awards: 'Debate & Creative Writing Mentor',
+    deptName: "Languages",
+    deptNameMr: "भाषा व सामाजिक शास्त्रे",
+    subject: "Secondary English Communication",
+    subjectMr: "माध्यमिक इंग्रजी संभाषण व व्याकरण",
+    qual: "M.A. (English), B.Ed.",
+    awards: "English Communication & Board Exam Mentor",
     photo: null,
-    initials: 'SP',
-    bio: 'Nurtures young writers, poets, and public speakers through regular essay competitions and story-telling sessions.'
+    initials: 'RJ',
+    isHM: false,
+    phone: '+91 9421427070',
+    email: 'ramjadhav1574@gmail.com',
+    dob: '01/05/1974',
+    bio: "Committed English educator preparing secondary school students for high-scoring board exam performance and fluent day-to-day bilingual communication.",
+    bioMr: "१० वी बोर्ड परीक्षेतील इंग्रजी विषयाच्या उत्तम निकालासाठी आणि विद्यार्थ्यांमधील इंग्रजीची भीती दूर करून आत्मविश्वास निर्माण करण्यासाठी सदैव प्रयत्नशील."
   },
   {
     id: 12,
-    name: 'Shri. Kundan Suryawanshi',
-    nameMr: 'श्री. कुंदन सूर्यवंशी',
-    role: 'Language Teacher',
-    roleMr: 'भाषा शिक्षक',
+    name: "Shri. Satish Budhesing Machiye",
+    nameMr: "श्री. सतीश बुद्धेसिंग माचिये",
+    role: "Graduate Teacher (Social Science)",
+    roleMr: "पदवीधर शिक्षक (सामाजिक शास्त्र)",
     dept: 'humanities',
-    deptName: 'Languages',
-    subject: 'Secondary Languages',
-    subjectMr: "चित्रकला, वारली कला व शिल्पकला",
-    qual: 'B.A., B.Ed.',
-    awards: 'Reading Culture Campaigner',
+    deptName: "Social Sciences",
+    deptNameMr: "भाषा व सामाजिक शास्त्रे",
+    subject: "Social Science, History & Civics",
+    subjectMr: "सामाजिक शास्त्र, इतिहास व नागरिकशास्त्र",
+    qual: "M.A., B.Ed.",
+    awards: "Mock Parliament & Constitution Day Coordinator",
     photo: null,
-    initials: 'KS',
-    bio: 'Inspires lifelong reading habits by organizing classroom book clubs and monthly student literary forums.'
+    initials: 'SM',
+    isHM: false,
+    phone: '+91 9767050809',
+    email: 'satishmachiye@gmail.com',
+    dob: '23/05/1981',
+    bio: "Dedicated social science teacher fostering democratic values, constitutional awareness, mock student parliaments, and deep historical understanding.",
+    bioMr: "सामाजिक शास्त्र व इतिहास विषयाचे निष्णात शिक्षक. संविधान दिन, बालसंसद, स्थानिक इतिहास अभ्यास आणि विद्यार्थ्यांमध्ये सामाजिक जाणीवा निर्माण करण्यात मोलाचा वाटा."
   },
   {
     id: 13,
-    name: 'Smt. K. N. Singit',
-    nameMr: 'श्रीमती के. एन. सिंगित',
-    role: 'Language Teacher',
-    roleMr: 'भाषा शिक्षिका',
+    name: "Shri. Arvind Prabhakarrao Rajhans",
+    nameMr: "श्री. अरविंद प्रभाकरराव राजहंस",
+    role: "Secondary Teacher (Social Science)",
+    roleMr: "माध्यमिक शिक्षक (सामाजिक शास्त्र)",
     dept: 'humanities',
-    deptName: 'Languages',
-    subject: 'Language & Grammar Pedagogy',
-    subjectMr: "मराठी भाषा व नागरिकशास्त्र",
-    qual: 'M.A., B.Ed.',
-    awards: 'Folk Lore & Cultural Coordinator',
+    deptName: "Social Sciences",
+    deptNameMr: "भाषा व सामाजिक शास्त्रे",
+    subject: "Geography & Environmental Studies",
+    subjectMr: "भूगोल व पर्यावरण अभ्यास",
+    qual: "B.A., B.Ed.",
+    awards: "700-Tree Dense Forest & Harit Vidyalaya Coordinator",
     photo: null,
-    initials: 'KS',
-    bio: 'Enriches students linguistic command while directing cultural dance and theatrical performances at annual functions.'
+    initials: 'AR',
+    isHM: false,
+    phone: '+91 9421012522',
+    email: 'arvind.rajhans.1968@gmail.com',
+    dob: '07/09/1968',
+    bio: "Senior geography educator and key coordinator behind Ganori Prashala’s 700-tree dense forest sanctuary, rainwater harvesting, and environmental sustainability initiatives.",
+    bioMr: "शाळेच्या ७०० झाडांच्या घनदाट अरण्याचे आणि ठिबक सिंचन प्रकल्पाचे मुख्य समन्वयक. भूगोल विषयाचे प्रत्यक्ष निसर्गात जाऊन क्षेत्रीय अभ्यासाद्वारे अध्यापन."
   },
   {
     id: 14,
-    name: 'Smt. U. N. Terpagar',
-    nameMr: 'श्रीमती यु. एन. तेरपगार',
-    role: 'Math & Science Teacher',
-    roleMr: 'गणित-विज्ञान शिक्षिका',
-    dept: 'stem',
-    deptName: 'Science & Mathematics',
-    subject: 'Mathematics & Experimental Science',
-    subjectMr: "प्राथमिक विज्ञान व गणित",
-    qual: 'B.Sc., B.Ed.',
-    awards: 'INSPIRE MANAK Research Facilitator',
+    name: "Smt. Sangita Manoharrao Babrekar",
+    nameMr: "श्रीमती संगीता मनोहरराव बाबरेकर",
+    role: "Secondary Teacher (Social Science)",
+    roleMr: "माध्यमिक शिक्षिका (सामाजिक शास्त्र)",
+    dept: 'humanities',
+    deptName: "Social Sciences",
+    deptNameMr: "भाषा व सामाजिक शास्त्रे",
+    subject: "History & Political Science",
+    subjectMr: "इतिहास व राज्यशास्त्र",
+    qual: "M.A., B.Ed.",
+    awards: "Heritage Club & National Integration Quiz Lead",
     photo: null,
-    initials: 'UT',
-    bio: 'Specialist in linking daily village observations with scientific hypotheses, leading teams to INSPIRE state awards.'
+    initials: 'SB',
+    isHM: false,
+    phone: '+91 9730715705',
+    email: 'sangitakathar1969@gmail.com',
+    dob: '10/11/1969',
+    bio: "Passionate educator inspiring pride in Maharashtra's rich history, Chhatrapati Shivaji Maharaj’s management ethics, and national integration through heritage quizzes.",
+    bioMr: "महाराष्ट्राचा देदिप्यमान इतिहास व छत्रपती शिवाजी महाराजांचे व्यवस्थापन विचार विद्यार्थ्यांपर्यंत पोहोचवणाऱ्या मार्गदर्शिका. हेरिटेज क्लब व प्रश्नमंजुषा प्रमुख."
   },
   {
     id: 15,
-    name: 'Smt. Sunanda Mirkar',
-    nameMr: 'श्रीमती सुनंदा मिरकर',
-    role: 'Primary Section Teacher',
-    roleMr: 'प्राथमिक शिक्षिका',
-    dept: 'primary-sports',
-    deptName: 'Primary Wing',
-    subject: 'Foundational Literacy & Numeracy (FLN)',
-    subjectMr: "भाषा व पायाभूत गणित",
-    qual: 'H.S.C., D.Ed.',
-    awards: 'Activity-Based Playway Learning Award',
+    name: "Shri. Bhaskar Kisanrao Gabhud",
+    nameMr: "श्री. भास्कर किसनराव गाभूडे",
+    role: "Graduate Teacher (Social Science)",
+    roleMr: "पदवीधर शिक्षक (सामाजिक शास्त्र)",
+    dept: 'humanities',
+    deptName: "Social Sciences",
+    deptNameMr: "भाषा व सामाजिक शास्त्रे",
+    subject: "Social Science & Economics",
+    subjectMr: "सामाजिक शास्त्र, नागरिकशास्त्र व अर्थशास्त्र",
+    qual: "B.A., B.Ed.",
+    awards: "Community Outreach & Value Education Mentor",
     photo: null,
-    initials: 'SM',
-    bio: 'Creates a joyful, nurturing foundation in reading, writing, and arithmetic for classes 5 and 6.'
+    initials: 'BG',
+    isHM: false,
+    phone: '+91 7875788671',
+    email: 'bhaskargabhud1971@gmail.com',
+    dob: '18/05/1971',
+    bio: "Veteran educator connecting social studies with rural economics, agriculture insights, ethical community living, and student moral education.",
+    bioMr: "ग्रामीण अर्थकारण, कृषी जीवन आणि सामाजिक मूल्यांची सांगड घालून सामाजिक शास्त्रे रंजक बनवणारे शिक्षक. विद्यार्थी संस्कार व मूल्यशिक्षणात सक्रिय."
   },
   {
     id: 16,
-    name: 'Smt. S. B. Baduk',
-    nameMr: 'श्रीमती एस. बी. बडुक',
-    role: 'Primary Section Teacher',
-    roleMr: 'प्राथमिक शिक्षिका',
+    name: "Smt. Bharti Vishwasrao Thakare",
+    nameMr: "श्रीमती भारती विश्वासराव ठाकरे",
+    role: "Art & Drawing Teacher",
+    roleMr: "कला व चित्रकला शिक्षिका",
     dept: 'primary-sports',
-    deptName: 'Primary Wing',
-    subject: 'Basic Science & Language Foundations',
-    subjectMr: "प्राथमिक शिक्षण व बालविकास",
-    qual: 'B.A., D.Ed.',
-    awards: 'Interactive Teaching Aids Creator',
+    deptName: "Arts & Aesthetics",
+    deptNameMr: "प्राथमिक व क्रीडा",
+    subject: "Fine Arts, Warli Painting & Sculpting",
+    subjectMr: "चित्रकला, वारली कला व शिल्पकला",
+    qual: "A.T.D. (Art Teacher Diploma), A.M.",
+    awards: "District Grade Exam Gold Mentor & BALA Aesthetics Lead",
     photo: null,
-    initials: 'SB',
-    bio: 'Integrates music, crafts, and nature walks into foundational learning for early adolescent learners.'
+    initials: 'BT',
+    isHM: false,
+    phone: '+91 9403500945',
+    email: 'thakarebharati78@gmail.com',
+    dob: '06/01/1978',
+    bio: "Master artist shaping the school's stunning BALA wall paintings, terracotta Warli pot artwork, clay sculpting, and mentoring students for elementary/intermediate drawing grade exams.",
+    bioMr: "चित्रकला व हस्तकलेच्या निष्णात मार्गदर्शिका. शाळेच्या भिंतींवरील बोलके रंगकाम (BALA), वारली पॉट पेंटिंग, शाडू मातीच्या मूर्ती आणि शासकीय रेखाकला परीक्षांचे मार्गदर्शन."
   },
   {
     id: 17,
-    name: 'Smt. R. S. Bele',
-    nameMr: 'श्रीमती आर. एस. बेले',
-    role: 'Primary Section Teacher',
-    roleMr: 'प्राथमिक शिक्षिका',
+    name: "Shri. Rajendra Wamanrao Jagtap",
+    nameMr: "श्री. राजेंद्र वामनराव जगताप",
+    role: "Physical Education & Sports Teacher",
+    roleMr: "शारीरिक शिक्षण व क्रीडा शिक्षक",
     dept: 'primary-sports',
-    deptName: 'Primary Wing',
-    subject: 'Social Skills & Foundational Learning',
-    subjectMr: "संगणक विज्ञान व ई-लर्निंग",
-    qual: 'M.A., D.Ed.',
-    awards: 'Child Psychology & Inclusion Specialist',
+    deptName: "Physical Education & Sports",
+    deptNameMr: "प्राथमिक व क्रीडा",
+    subject: "Physical Education, Yoga & Athletics",
+    subjectMr: "क्रीडा, योग व शारीरिक आरोग्य",
+    qual: "B.P.Ed., M.P.Ed.",
+    awards: "District Level Lezim, Volleyball & Kabaddi Champions Coach",
     photo: null,
-    initials: 'RB',
-    bio: 'Focuses on child development, confidence building, and encouraging first-generation school learners.'
+    initials: 'RJ',
+    isHM: false,
+    phone: '+91 8275322602',
+    email: 'rajujagtap8275@gmail.com',
+    dob: '11/04/1978',
+    bio: "Dynamic sports director training students in traditional Lezim, volleyball, kho-kho, kabaddi, yoga postures, and athletic track events with consistent district championships.",
+    bioMr: "शाळेच्या क्रीडा विभागाचे प्रमुख. पारंपरिक लेझीम, व्हॉलीबॉल, खो-खो, कबड्डी आणि ॲथलेटिक्समध्ये जिल्हा व विभागीय स्तरावर विजेते खेळाडू घडवणारे मार्गदर्शक."
   },
   {
     id: 18,
-    name: 'Shri. Sagar Malve',
-    nameMr: 'श्री. सागर मालवे',
-    role: 'Vocational Instructor (Automobile)',
-    roleMr: 'व्यवसाय प्रशिक्षक (ऑटोमोबाईल)',
-    dept: 'vocational',
-    deptName: 'Vocational & Labs',
-    subject: 'Automobile Engineering & Mechanics (NSQF)',
-    subjectMr: "भाषा व समाजशास्त्र",
-    qual: 'Diploma in Automobile Engineering',
-    awards: 'NSQF Skill Mentor of Excellence',
+    name: "Smt. Rupali Vilasrao Annadate",
+    nameMr: "श्रीमती रूपाली विलासराव अन्नदाते",
+    role: "Primary Teacher",
+    roleMr: "प्राथमिक शिक्षिका",
+    dept: 'primary-sports',
+    deptName: "Primary Wing",
+    deptNameMr: "प्राथमिक व क्रीडा",
+    subject: "Foundational Learning & Primary Pedagogy (All Subjects)",
+    subjectMr: "पायाभूत शिक्षण, भाषा व सर्व प्राथमिक विषय",
+    qual: "M.A., D.Ed.",
+    awards: "Activity-Based Playway Learning Coordinator",
     photo: null,
-    initials: 'SM',
-    bio: 'Empowers rural youth with certified automotive diagnostic skills, opening pathways for immediate employment and self-reliance.'
+    initials: 'RA',
+    isHM: false,
+    phone: '+91 9552546990',
+    email: 'rupali.annadate@gmail.com',
+    dob: '28/06/1979',
+    bio: "Warm and nurturing primary educator creating an engaging, joy-filled foundation in language, arithmetic, and creative arts for young learners entering the high school campus.",
+    bioMr: "प्राथमिक विभागातील प्रेमळ व कार्यकुशल शिक्षिका. आनंददायी अध्ययन, कृतियुक्त शिक्षण, भाषा विकास आणि विद्यार्थ्यांच्या सर्वांगीण विकासाचा भक्कम पाया रचतात."
   },
   {
     id: 19,
-    name: 'Shri. Tushar Ambhore',
-    nameMr: 'श्री. तुषार अंभोरे',
-    role: 'Vocational Instructor (Multi-Skill)',
-    roleMr: 'व्यवसाय प्रशिक्षक (मल्टीस्किल)',
+    name: "Shri. Amol Vilas Sapkal",
+    nameMr: "श्री. अमोल विलास सपकाळ",
+    role: "Vocational Teacher (Automobile)",
+    roleMr: "व्यवसाय प्रशिक्षक (ऑटोमोबाईल)",
     dept: 'vocational',
-    deptName: 'Vocational & Labs',
-    subject: 'Multi-Skill Foundation Course (MSFC)',
-    subjectMr: "गणित व विज्ञान पायाभूत",
-    qual: 'Technical Vocational Certified Trainer',
-    awards: 'Rural Entrepreneurship Facilitator',
+    deptName: "Vocational & Technical Education",
+    deptNameMr: "कौशल्य व प्रयोगशाळा",
+    subject: "Automobile Engineering & Diagnostics (NSQF)",
+    subjectMr: "NSQF ऑटोमोबाईल टेक्नॉलॉजी व मेकॅनिक्स",
+    qual: "Diploma in Automobile Engineering",
+    awards: "NSQF Certified Automotive Skill Trainer",
     photo: null,
-    initials: 'TA',
-    bio: 'Mentors students across electrical works, gardening, basic fabrication, and tailoring enterprise.'
+    initials: 'AS',
+    isHM: false,
+    phone: '+91 7507926082',
+    email: 'amolsapkal9970@gmail.com',
+    dob: '01/09/1993',
+    bio: "Technical instructor providing hands-on training on two-wheeler and four-wheeler engines, braking systems, electrical wiring, and automotive maintenance for self-employment.",
+    bioMr: "ऑटोमोबाईल लॅबचे तज्ज्ञ प्रशिक्षक. दुचाकी व चारचाकी वाहनांची दुरुस्ती, इंजिन संरचना, वायरिंग व ब्रेक सिस्टीमचे प्रत्यक्ष प्रात्यक्षिकांसह व्यावसायिक प्रशिक्षण देतात."
   },
   {
     id: 20,
-    name: 'Shri. Aniket Dilip Mane',
-    nameMr: 'श्री. अनिकेत दिलीप माने',
-    role: 'Lab Assistant & AI/Robotics Incharge',
-    roleMr: 'लॅब असिस्टंट व संगणक / AI निर्देशक',
+    name: "Shri. Sagar Ramrao Bhalke",
+    nameMr: "श्री. सागर रामराव भालके",
+    role: "Vocational Trainer (Multi-Skill Agriculture)",
+    roleMr: "व्यवसाय प्रशिक्षक (मल्टी-स्किल कृषी)",
     dept: 'vocational',
-    deptName: 'Vocational & Labs',
-    subject: 'AI Lab, Robotics, 3D Printing & IT Infrastructure',
-    subjectMr: 'AI लॅब, रोबोटिक्स, 3D प्रिंटिंग व संगणक प्रणाली',
-    qual: 'B.Tech. Computer Science',
-    awards: 'MahaAI Mission & HP Lab Operations Lead',
-    photo: 'images/aniket-mane.jpg',
+    deptName: "Vocational & Skill Education",
+    deptNameMr: "कौशल्य व प्रयोगशाळा",
+    subject: "Multi-Skill Foundation Course (MSFC) & Agriculture",
+    subjectMr: "मल्टी-स्किल फाउंडेशन कोर्स (MSFC) व कृषी तंत्रज्ञान",
+    qual: "B.Sc. Agriculture / Certified Technical Trainer",
+    awards: "Rural Agri-Entrepreneurship & Drip Irrigation Guide",
+    photo: null,
+    initials: 'SB',
     isHM: false,
-    bio: 'B.Tech Computer Science पदवीधर. गणोरी प्रशालेच्या अत्याधुनिक AI वर्कस्टेशन्स, रोबोटिक्स किट्स, 3D प्रिंटर्स आणि डिजिटल तंत्रज्ञान प्रणालींचे तांत्रिक प्रमुख व मार्गदर्शक.'
+    phone: '+91 9158005084',
+    email: 'bhalkesagar4@gmail.com',
+    dob: '08/10/1994',
+    bio: "Agricultural and multi-skill expert training rural youth in modern grafting, drip irrigation calibration, seed cultivation, electrical wiring, and sustainable organic farming.",
+    bioMr: "मल्टी-स्किल लॅब व कृषी तंत्रज्ञानाचे मार्गदर्शक. ठिबक सिंचन, आधुनिक रोपवाटिका, कलम बांधणी, सेंद्रिय शेती व मूलभूत तांत्रिक कौशल्यांचे विद्यार्थ्यांना प्रत्यक्ष प्रशिक्षण."
   },
   {
     id: 21,
-    name: 'Shri. Rohidas Mhaske',
-    nameMr: 'श्री. रोहिदास म्हस्के',
-    role: 'Senior Administrative Staff',
-    roleMr: 'शिक्षकेतर कर्मचारी / वरिष्ठ सहाय्यक',
-    dept: 'leadership',
-    deptName: 'Administration',
-    subject: 'School Records, Facilities & Campus Care',
-    subjectMr: "विज्ञान व AI लॅब व्यवस्थापन",
-    qual: 'Administrative Support Specialist',
-    awards: 'Exemplary Campus Management & Care',
-    photo: null,
-    initials: 'RM',
-    bio: 'The dependable pillar ensuring flawless campus maintenance, clean water supplies, student safety, and administrative execution.'
-  },
-  {
-    id: 22,
-    name: 'Shri. Ashok Laxman Sonawane',
-    nameMr: 'श्री. अशोक लक्ष्मण सोनवणे',
-    role: 'Librarian & Activity Coordinator',
-    roleMr: 'ग्रंथपाल व उपक्रम समन्वयक',
-    dept: 'leadership',
-    deptName: 'Library & Activities',
-    subject: 'Library Cataloguing & Public Relations',
-    subjectMr: "शालेय प्रशासन व विद्यार्थी नोंदी",
-    qual: 'B.Lib., M.A.',
-    awards: 'SMC Liaison & Community Outreach Lead',
-    photo: null,
-    initials: 'AS',
-    bio: 'Coordinates school management committee programs, parent interactions, and cataloguing the 1,000+ book inventory.'
+    name: "Shri. Aniket Dilip Mane",
+    nameMr: "श्री. अनिकेत दिलीप माने",
+    role: "AI Trainer & Robotics / IT Incharge",
+    roleMr: "AI ट्रेनर व रोबोटिक्स / IT निर्देशक",
+    dept: 'vocational',
+    deptName: "Artificial Intelligence & Robotics",
+    deptNameMr: "कौशल्य व प्रयोगशाळा",
+    subject: "Artificial Intelligence (AI), Robotics, 3D Printing & Coding",
+    subjectMr: "AI लॅब, रोबोटिक्स, 3D प्रिंटिंग व संगणक प्रणाली",
+    qual: "B.Tech. Computer Science",
+    awards: "MahaAI Mission & HP Lab Operations Lead",
+    photo: 'images/aniket-mane.jpg',
+    initials: 'AM',
+    isHM: false,
+    phone: '+91 9075703080',
+    email: 'aniketmane1907@gmail.com',
+    dob: '19/07/2000',
+    bio: "B.Tech in Computer Science and dedicated AI Trainer directing Maharashtra’s first school AI Laboratory, mentoring rural students in Python coding, robotics kits, 3D printing, and generative AI tools under the MahaAI mission.",
+    bioMr: "B.Tech Computer Science पदवीधर. महाराष्ट्रातील पहिल्या शालेय AI लॅबचे मुख्य ट्रेनर व मार्गदर्शक. ग्रामीण विद्यार्थ्यांना पायथॉन कोडिंग, रोबोटिक्स, 3D प्रिंटिंग आणि कृत्रिम बुद्धिमत्ता (AI) तंत्रज्ञानाचे आधुनिक प्रशिक्षण देतात."
   }
 ];
 
@@ -890,7 +998,7 @@ const I18N_DICTIONARY = {
     "nav_about": "शाळेविषयी",
     "nav_labs": "१० प्रयोगशाळा",
     "nav_activities": "शालेय उपक्रम",
-    "nav_staff": "शिक्षकवृंद (२२)",
+    "nav_staff": "शिक्षकवृंद (२१)",
     "nav_awards": "गौरव व पुरस्कार",
     "nav_contact": "प्रवेश व संपर्क",
     "nav_admission": "प्रवेश सुरू",
@@ -899,7 +1007,7 @@ const I18N_DICTIONARY = {
     "hero_desc": "<b>पीएम श्री जिल्हा परिषद प्रशाला, गणोरी</b> मध्ये आपले सहर्ष स्वागत — राज्यातील पहिली शालेय AI लॅब, १० अत्याधुनिक प्रयोगशाळा, ७०० झाडांचे घनदाट अरण्य आणि शासकीय विज्ञान प्रदर्शनात ५३ वर्षांनी राष्ट्रीय स्तरावर निवड झालेली पहिली जि. प. शाळा.",
     "hero_btn_labs": "🔬 १० प्रयोगशाळा पहा",
     "hero_btn_activities": "📸 २ वर्षांचे उपक्रम",
-    "hero_btn_staff": "👥 २२ शिक्षकवृंद",
+    "hero_btn_staff": "👥 २१ शिक्षकवृंद",
     "hero_chip_1": "🤖 राज्यातील १ ली AI लॅब",
     "hero_chip_2": "🔭 ५ इस्रो विमान स्कॉलर्स",
     "hero_chip_3": "🌳 ७००+ वृक्षांचे अरण्य",
@@ -947,9 +1055,9 @@ const I18N_DICTIONARY = {
     "act_filter_arts": "🎨 कला व संस्कृती",
     "act_filter_welfare": "🤝 विद्यार्थी कल्याण",
     "staff_tag": "समर्पित शिक्षकवृंद · टीम गणोरी प्रशाला",
-    "staff_title": "आमचे २२ मार्गदर्शक व शिक्षक",
-    "staff_desc": "मुख्याध्यापक श्री. अनिल प्र. देशमुख यांच्या प्रेरणादायी नेतृत्वाखाली आमचे २२ समर्पित शिक्षक, लॅब संचालक आणि कर्मचारी प्रत्येक विद्यार्थ्याचा सर्वांगीण विकास घडवण्यासाठी अहोरात्र कार्यरत आहेत.",
-    "staff_tab_all": "सर्व (२२)",
+    "staff_title": "आमचे २१ मार्गदर्शक व शिक्षक",
+    "staff_desc": "मुख्याध्यापक श्री. अनिल प्र. देशमुख यांच्या प्रेरणादायी नेतृत्वाखाली आमचे २१ समर्पित शिक्षक, लॅब संचालक आणि कर्मचारी प्रत्येक विद्यार्थ्याचा सर्वांगीण विकास घडवण्यासाठी अहोरात्र कार्यरत आहेत.",
+    "staff_tab_all": "सर्व (२१)",
     "staff_tab_lead": "प्रशासन व नेतृत्व",
     "staff_tab_stem": "विज्ञान व गणित",
     "staff_tab_humanities": "भाषा व सामाजिक शास्त्रे",
@@ -1001,7 +1109,7 @@ const I18N_DICTIONARY = {
     "footer_green": "🌿 <b>हरित संकल्प:</b> तंबाखूमुक्त व प्लास्टिकमुक्त पर्यावरणपूरक परिसर",
     "footer_copy": "© <span id=\"currentYear\">2026</span> पीएम श्री जिल्हा परिषद प्रशाला, गणोरी. सर्व हक्क राखीव.",
     "footer_dev": "<b>अनिकेत माने (B.Tech Computer Science)</b> यांच्याद्वारे विकसित | गणोरीतून सस्नेह निर्मित ❤️",
-    "staff_btn_show_all": "सर्व २२ शिक्षकवृंद पहा",
+    "staff_btn_show_all": "सर्व २१ शिक्षकवृंद पहा",
         "form_name_ph": "उदा. अनिकेत माने किंवा पालकांचे नाव",
     "form_phone_ph": "१० अंकी मोबाईल नंबर (उदा. 9876543210)",
     "form_note_ph": "कोणत्या वर्गासाठी प्रवेश हवा आहे किंवा इतर चौकशी...",
@@ -1022,7 +1130,7 @@ const I18N_DICTIONARY = {
     "nav_about": "About School",
     "nav_labs": "10 Laboratories",
     "nav_activities": "Activities",
-    "nav_staff": "Faculty & Staff (22)",
+    "nav_staff": "Faculty & Staff (21)",
     "nav_awards": "Awards & Honors",
     "nav_contact": "Admissions & Contact",
     "nav_admission": "Admissions Open",
@@ -1031,7 +1139,7 @@ const I18N_DICTIONARY = {
     "hero_desc": "Welcome to <b>PM SHRI Zilla Parishad Prashala, Ganori</b> — Home to Maharashtra’s 1st School AI Laboratory, 10 advanced laboratories, a 700+ tree dense micro-forest, and the first ZP school in 53 years to qualify for the National Science Exhibition.",
     "hero_btn_labs": "🔬 Explore 10 Labs",
     "hero_btn_activities": "📸 2-Year Activities",
-    "hero_btn_staff": "👥 22 Faculty Profiles",
+    "hero_btn_staff": "👥 21 Faculty Profiles",
     "hero_chip_1": "🤖 1st School AI Lab in MH",
     "hero_chip_2": "🔭 5 ISRO Flight Scholars",
     "hero_chip_3": "🌳 700+ Tree Dense Forest",
@@ -1079,9 +1187,9 @@ const I18N_DICTIONARY = {
     "act_filter_arts": "🎨 Art & Culture",
     "act_filter_welfare": "🤝 Student Welfare",
     "staff_tag": "Dedicated Educators · Team Ganori Prashala",
-    "staff_title": "Our 22 Faculty Members & Mentors",
-    "staff_desc": "Under the inspiring leadership of Headmaster Shri. Anil P. Deshmukh, our 22 devoted teachers, lab instructors, and staff work untiringly to nurture every student's potential.",
-    "staff_tab_all": "All (22)",
+    "staff_title": "Our 21 Faculty Members & Mentors",
+    "staff_desc": "Under the inspiring leadership of Headmaster Shri. Anil P. Deshmukh, our 21 devoted teachers, lab instructors, and staff work untiringly to nurture every student's potential.",
+    "staff_tab_all": "All (21)",
     "staff_tab_lead": "Administration & Leadership",
     "staff_tab_stem": "Science & Mathematics",
     "staff_tab_humanities": "Languages & Social Sciences",
@@ -1133,7 +1241,7 @@ const I18N_DICTIONARY = {
     "footer_green": "🌿 <b>Green Pledge:</b> 100% Tobacco-Free & Plastic-Free Eco-Campus",
     "footer_copy": "© <span id=\"currentYear\">2026</span> PM SHRI Zilla Parishad Prashala, Ganori. All Rights Reserved.",
     "footer_dev": "Developed by <b>Aniket Mane (B.Tech Computer Science)</b> | Crafted with ❤️ from Ganori",
-    "staff_btn_show_all": "View All 22 Faculty & Staff",
+    "staff_btn_show_all": "View All 21 Faculty & Staff",
         "form_name_ph": "e.g. Student Name or Parent Name",
     "form_phone_ph": "10-digit Mobile Number (e.g. 9876543210)",
     "form_note_ph": "Class for admission, lab inquiry, or message...",
@@ -1266,7 +1374,7 @@ function updatePageTranslations(lang) {
     document.title = 'पीएम श्री जिल्हा परिषद प्रशाला, गणोरी | PM SHRI ZP Prashala, Ganori';
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
-      metaDesc.setAttribute('content', 'पीएम श्री जिल्हा परिषद प्रशाला, गणोरी, ता. फुलंब्री, जि. छत्रपती संभाजीनगरचे अधिकृत संकेतस्थळ. महाराष्ट्रातील पहिली शालेय AI लॅब, १० अत्याधुनिक प्रयोगशाळा, ७०० झाडांचे घनदाट अरण्य आणि २२ तज्ज्ञ शिक्षकवृंद.');
+      metaDesc.setAttribute('content', 'पीएम श्री जिल्हा परिषद प्रशाला, गणोरी, ता. फुलंब्री, जि. छत्रपती संभाजीनगरचे अधिकृत संकेतस्थळ. महाराष्ट्रातील पहिली शालेय AI लॅब, १० अत्याधुनिक प्रयोगशाळा, ७०० झाडांचे घनदाट अरण्य आणि २१ तज्ज्ञ शिक्षकवृंद.');
     }
   } else {
     document.title = 'PM SHRI Zilla Parishad Prashala, Ganori | Official Portal';
@@ -1558,7 +1666,7 @@ document.addEventListener('click', (e) => {
 });
 
 // -----------------------------------------------------------------------------
-// 22 Teachers & Staff Directory
+// 21 Teachers & Staff Directory
 // -----------------------------------------------------------------------------
 let staffSearchQuery = '';
 let staffCategoryFilter = 'all';
@@ -1587,7 +1695,11 @@ function renderStaff() {
     const nameMatch = member.name.toLowerCase().includes(q) || (member.nameMr && member.nameMr.toLowerCase().includes(q));
     const roleMatch = member.role.toLowerCase().includes(q) || (member.roleMr && member.roleMr.toLowerCase().includes(q));
     const subMatch = member.subject.toLowerCase().includes(q) || (member.subjectMr && member.subjectMr.toLowerCase().includes(q));
-    return nameMatch || roleMatch || subMatch;
+    const phoneDigits = member.phone ? member.phone.replace(/[^0-9]/g, '') : '';
+    const qDigits = q.replace(/[^0-9]/g, '');
+    const phoneMatch = qDigits.length >= 3 && phoneDigits.includes(qDigits);
+    const emailMatch = member.email && member.email.toLowerCase().includes(q);
+    return nameMatch || roleMatch || subMatch || phoneMatch || emailMatch;
   });
 
   if (filtered.length === 0) {
@@ -1608,16 +1720,17 @@ function renderStaff() {
     return;
   }
 
-  // Always show all matching staff members directly (all 22 by default)
+  // Update dynamic count badge
   if (countBadge) {
+    const totalCount = STAFF_DATA.length;
     if (staffCategoryFilter === 'all' && !q) {
       countBadge.textContent = isMr
-        ? `२२ पैकी २२ शिक्षक दाखवत आहे`
-        : `Showing all 22 Staff Members`;
+        ? `${totalCount} पैकी ${totalCount} शिक्षक दाखवत आहे`
+        : `Showing all ${totalCount} Staff Members`;
     } else {
       countBadge.textContent = isMr
-        ? `${filtered.length} पैकी २२ शिक्षक दाखवत आहे`
-        : `Showing ${filtered.length} of 22 Staff Members`;
+        ? `${filtered.length} पैकी ${totalCount} शिक्षक दाखवत आहे`
+        : `Showing ${filtered.length} of ${totalCount} Staff Members`;
     }
   }
 
@@ -1626,14 +1739,14 @@ function renderStaff() {
     const role = isMr ? (member.roleMr || member.role) : member.role;
     const subject = isMr ? (member.subjectMr || member.subject) : member.subject;
     const hmText = isMr ? 'मुख्याध्यापक' : 'Headmaster';
-    const profileLinkText = isMr ? 'संपूर्ण प्रोफाइल पहा ➔' : 'View Profile ➔';
+    const profileLinkText = isMr ? 'सविस्तर प्रोफाइल पहा ➔' : 'View Profile ➔';
 
     const avatarHtml = member.photo
       ? `<img src="${member.photo}" alt="${escapeHtml(name)}" loading="lazy">`
       : `<div class="staff-avatar-initials">${member.initials || 'ZP'}</div>`;
 
     return `
-      <div class="staff-card" onclick="openStaffModal(${member.id})">
+      <div class="staff-card" onclick="openStaffModal(${member.id})" tabindex="0" role="button" aria-label="${escapeHtml(name)}">
         ${member.isHM ? `<span class="staff-hm-badge">${hmText}</span>` : ''}
         <div class="staff-avatar-wrap">
           ${avatarHtml}
@@ -1642,8 +1755,13 @@ function renderStaff() {
         <p class="staff-designation">${escapeHtml(role)}</p>
         <span class="staff-subject-chip">${escapeHtml(subject)}</span>
         <p class="staff-qual">${escapeHtml(member.qual)}</p>
-        <div style="margin-top: 12px;">
-          <span style="font-size: 0.78rem; font-weight:700; color: var(--accent); cursor: pointer;">${profileLinkText}</span>
+        ${member.phone ? `
+          <div class="staff-card-contact-strip">
+            <span class="staff-chip-phone">📞 ${escapeHtml(member.phone)}</span>
+          </div>
+        ` : ''}
+        <div style="margin-top: 10px;">
+          <span class="staff-view-btn">${profileLinkText}</span>
         </div>
       </div>
     `;
@@ -1671,7 +1789,7 @@ function initStaffSearchAndFilter() {
     });
   }
 
-  // Hook up all navigation links pointing to #staff (nav link, hero button, footer link)
+  // Hook up navigation links
   document.querySelectorAll('a[href="#staff"]').forEach(link => {
     link.addEventListener('click', () => {
       staffCategoryFilter = 'all';
@@ -1684,6 +1802,17 @@ function initStaffSearchAndFilter() {
       }
       renderStaff();
     });
+  });
+
+  // Modal backdrop click and ESC listener
+  const modal = document.getElementById('staffModal');
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeStaffModal();
+    });
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeStaffModal();
   });
 }
 
@@ -1710,44 +1839,92 @@ function openStaffModal(memberId) {
   const isMr = currentLang === 'mr';
   const name = isMr ? (member.nameMr || member.name) : member.name;
   const role = isMr ? (member.roleMr || member.role) : member.role;
+  const dept = isMr ? (member.deptNameMr || member.deptName) : member.deptName;
   const subject = isMr ? (member.subjectMr || member.subject) : member.subject;
-  const callBtnText = isMr ? `📞 शालेय कार्यालयाशी संपर्क करा (${member.phone})` : `📞 Call School Office (${member.phone})`;
+  const bio = isMr ? (member.bioMr || member.bio) : member.bio;
+  const hmText = isMr ? 'मुख्याध्यापक' : 'Headmaster';
+
+  const callBtnText = isMr ? `📞 फोन करा (${member.phone})` : `📞 Call (${member.phone})`;
+  const emailBtnText = isMr ? `✉️ ईमेल पाठवा` : `✉️ Send Email`;
 
   const avatarHtml = member.photo
     ? `<img src="${member.photo}" alt="${escapeHtml(name)}" style="width:100%;height:100%;object-fit:cover;">`
-    : `<div class="staff-avatar-initials">${member.initials || 'ZP'}</div>`;
+    : `<div class="staff-avatar-initials" style="font-size:2.4rem;">${member.initials || 'ZP'}</div>`;
 
   card.innerHTML = `
     <button class="staff-modal-close" onclick="closeStaffModal()" aria-label="Close Profile">✕</button>
-    <div class="staff-avatar-wrap" style="width: 120px; height: 120px; margin: 0 auto 1.2rem;">
-      ${avatarHtml}
+    <div class="staff-modal-header">
+      <div class="staff-avatar-wrap" style="width: 120px; height: 120px; margin: 0 auto 0.8rem; border-width: 4px;">
+        ${avatarHtml}
+      </div>
+      ${member.isHM ? `<div style="margin-bottom:8px;"><span class="staff-hm-badge" style="position:static; display:inline-block; font-size:0.75rem; padding:3px 12px;">${hmText}</span></div>` : ''}
+      <h3 style="font-family: var(--font-head); font-size: 1.45rem; color: var(--primary); margin-bottom: 0.25rem;">
+        ${escapeHtml(name)}
+      </h3>
+      <p style="font-weight: 700; color: var(--accent-dark); font-size: 0.95rem; margin-bottom: 0.25rem;">
+        ${escapeHtml(role)}
+      </p>
+      <span style="display:inline-block; font-size:0.8rem; background:var(--bg-alt); color:var(--text-muted); padding:3px 12px; border-radius:var(--radius-full); margin-bottom:1rem; font-weight:600;">
+        🏢 ${escapeHtml(dept)}
+      </span>
     </div>
-    <h3 style="font-family: var(--font-head); font-size: 1.5rem; color: var(--primary); margin-bottom: 0.3rem;">
-      ${escapeHtml(name)}
-    </h3>
-    <p style="font-weight: 700; color: var(--accent-dark); font-size: 0.95rem; margin-bottom: 0.6rem;">
-      ${escapeHtml(role)}
-    </p>
-    <div style="background: var(--bg-alt); padding: 10px; border-radius: var(--radius-md); margin-bottom: 1.2rem;">
-      <p style="font-size: 0.88rem; color: var(--text-main); font-weight: 600;">📚 ${escapeHtml(subject)}</p>
-      <p style="font-size: 0.82rem; color: var(--text-muted);">${escapeHtml(member.qual)}</p>
+
+    <div class="staff-modal-details-grid">
+      <div class="staff-detail-item">
+        <span class="staff-detail-label">${isMr ? '📚 अध्यापन विषय' : '📚 Teaching Subject'}</span>
+        <span class="staff-detail-val">${escapeHtml(subject)}</span>
+      </div>
+      <div class="staff-detail-item">
+        <span class="staff-detail-label">${isMr ? '🎓 शैक्षणिक पात्रता' : '🎓 Qualification'}</span>
+        <span class="staff-detail-val">${escapeHtml(member.qual)}</span>
+      </div>
+      ${member.dob ? `
+      <div class="staff-detail-item">
+        <span class="staff-detail-label">${isMr ? '🎂 जन्मदिनांक' : '🎂 Date of Birth'}</span>
+        <span class="staff-detail-val">${escapeHtml(member.dob)}</span>
+      </div>` : ''}
+      ${member.email ? `
+      <div class="staff-detail-item">
+        <span class="staff-detail-label">${isMr ? '✉️ ईमेल पत्ता' : '✉️ Email Address'}</span>
+        <span class="staff-detail-val"><a href="mailto:${member.email}" style="color:var(--primary); text-decoration:underline;">${escapeHtml(member.email)}</a></span>
+      </div>` : ''}
+      ${member.awards ? `
+      <div class="staff-detail-item" style="grid-column: 1 / -1;">
+        <span class="staff-detail-label">${isMr ? '⭐ मुख्य जबाबदारी / गौरव' : '⭐ Key Role / Honors'}</span>
+        <span class="staff-detail-val">${escapeHtml(member.awards)}</span>
+      </div>` : ''}
     </div>
-    <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.2rem;">
-      ${escapeHtml(member.bio || member.awards)}
-    </p>
-    ${member.phone ? `
-      <a href="tel:${member.phone}" class="btn-primary" style="justify-content:center; width:100%;">
-        ${callBtnText}
-      </a>
-    ` : ''}
+
+    <div class="staff-modal-bio-box">
+      <p style="font-size: 0.92rem; color: var(--text-main); line-height: 1.6; margin: 0;">
+        ${escapeHtml(bio)}
+      </p>
+    </div>
+
+    <div class="staff-modal-actions">
+      ${member.phone ? `
+        <a href="tel:${member.phone.replace(/[^0-9+]/g, '')}" class="btn-primary" style="justify-content:center; flex:1; min-width:180px; font-size:0.88rem; padding:10px 16px;">
+          ${callBtnText}
+        </a>
+      ` : ''}
+      ${member.email ? `
+        <a href="mailto:${member.email}" class="btn-secondary" style="justify-content:center; flex:1; min-width:180px; font-size:0.88rem; padding:10px 16px; color:var(--text-main); border:1px solid var(--border); background:var(--bg-alt);">
+          ${emailBtnText}
+        </a>
+      ` : ''}
+    </div>
   `;
 
   modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
 }
 
 function closeStaffModal() {
   const modal = document.getElementById('staffModal');
-  if (modal) modal.classList.remove('active');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
 }
 
 // -----------------------------------------------------------------------------

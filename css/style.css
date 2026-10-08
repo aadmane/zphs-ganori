@@ -1520,6 +1520,237 @@ html[lang="mr"] h5 {
   text-transform: uppercase;
 }
 
+/* Staff Card Contact & Profile Button */
+.staff-card-contact-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.staff-chip-phone {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--primary);
+  background: var(--bg-alt);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+}
+
+[data-theme="dark"] .staff-chip-phone {
+  color: var(--accent);
+}
+
+.staff-view-btn {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: inline-block;
+}
+
+.staff-card:hover .staff-view-btn {
+  color: var(--accent);
+  transform: translateX(3px);
+}
+
+/* ==========================================================================
+   STAFF DETAIL MODAL & LIGHTBOX
+   ========================================================================== */
+.staff-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+  padding: 1.5rem;
+}
+
+.staff-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.staff-modal-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 2.2rem;
+  max-width: 550px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  transform: scale(0.95) translateY(12px);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: center;
+}
+
+.staff-modal.active .staff-modal-card {
+  transform: scale(1) translateY(0);
+}
+
+.staff-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  z-index: 10;
+}
+
+.staff-modal-close:hover {
+  background: var(--accent);
+  color: #0f172a;
+  transform: rotate(90deg);
+}
+
+.staff-modal-header {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.staff-modal-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  background: var(--bg-alt);
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  margin-bottom: 1.2rem;
+  text-align: left;
+}
+
+.staff-detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.staff-detail-label {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.staff-detail-val {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-main);
+  word-break: break-word;
+}
+
+.staff-modal-bio-box {
+  background: rgba(10, 51, 28, 0.05);
+  border-left: 3px solid var(--accent);
+  padding: 12px 16px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin-bottom: 1.4rem;
+  text-align: left;
+}
+
+[data-theme="dark"] .staff-modal-bio-box {
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.staff-modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* Lightbox Modal */
+.lightbox-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 15, 29, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+  padding: 1.5rem;
+}
+
+.lightbox-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox-content-box {
+  position: relative;
+  max-width: 900px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lightbox-img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-caption-text {
+  color: #f1f5f9;
+  margin-top: 12px;
+  font-size: 1rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.lightbox-close-btn {
+  position: absolute;
+  top: -45px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.lightbox-close-btn:hover {
+  background: var(--accent);
+  color: #000;
+}
+
 .staff-action-row {
   margin-top: 2.5rem;
   text-align: center;
