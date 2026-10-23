@@ -1,0 +1,20 @@
+# Python & OS Artifacts
+__pycache__/
+*.pyc
+*.pyo
+temp_edge/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Validation & build scripts (optional to keep or ignore)
+validate_site.py
+check_site.py
+compare_dicts.py
+compare_keys.py
+verify_slice.py
+update_site.py
+fix_js_errors.py
+update_aniket_profile.py
+test_edge.py

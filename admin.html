@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🏫 शाळा संकेतस्थळ व्यवस्थापन पॅनेल | Admin Panel - ZPHS Ganori</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1a73e8;
+      --primary-dark: #1557b0;
+      --primary-light: #e8f0fe;
+      --success: #34a853;
+      --success-light: #e6f4ea;
+      --warning: #f9ab00;
+      --warning-light: #fef7e0;
+      --danger: #ea4335;
+      --danger-light: #fce8e6;
+      --bg: #f0f4f8;
+      --surface: #ffffff;
+      --surface-alt: #f8fafd;
+      --border: #dce3ed;
+      --text: #1a1f36;
+      --text-muted: #6b7799;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow: 0 4px 16px rgba(26,115,232,0.10);
+      --radius: 12px;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Sans Devanagari', 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    /* Header */
+    .admin-header {
+      background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+      color: white; padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px; position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 12px rgba(26,115,232,0.3);
+    }
+    .admin-header-brand { display: flex; align-items: center; gap: 14px; }
+    .admin-header-logo {
+      width: 44px; height: 44px; background: rgba(255,255,255,0.2);
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      font-size: 22px; border: 1px solid rgba(255,255,255,0.3);
+    }
+    .admin-header-title { font-size: 1.05rem; font-weight: 700; }
+    .admin-header-sub { font-size: 0.78rem; opacity: 0.85; margin-top: 1px; }
+    .header-view-btn {
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.35);
+      color: white; padding: 8px 18px; border-radius: 8px;
+      font-size: 0.88rem; font-weight: 600; cursor: pointer;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .header-view-btn:hover { background: rgba(255,255,255,0.28); }
+
+    /* Layout */
+    .admin-layout { display: grid; grid-template-columns: 240px 1fr; min-height: calc(100vh - 68px); }
+
+    /* Sidebar */
+    .admin-sidebar {
+      background: var(--surface); border-right: 1px solid var(--border);
+      padding: 24px 0; position: sticky; top: 68px;
+      height: calc(100vh - 68px); overflow-y: auto;
+    }
+    .sidebar-section-label {
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--text-muted); padding: 4px 20px 8px; margin-top: 8px;
+    }
+    .sidebar-nav-item {
+      display: flex; align-items: center; gap: 12px; padding: 11px 20px;
+      font-size: 0.9rem; font-weight: 500; color: var(--text-muted);
+      cursor: pointer; transition: all 0.18s; border-left: 3px solid transparent; user-select: none;
+    }
+    .sidebar-nav-item:hover { background: var(--primary-light); color: var(--primary); }
+    .sidebar-nav-item.active { background: var(--primary-light); color: var(--primary); border-left-color: var(--primary); font-weight: 600; }
+    .sidebar-nav-item .nav-icon { font-size: 18px; width: 22px; text-align: center; }
+
+    /* Main */
+    .admin-main { padding: 32px; max-width: 900px; }
+
+    /* Panels */
+    .panel { display: none; }
+    .panel.active { display: block; animation: panelIn 0.22s ease; }
+    @keyframes panelIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    .panel-header { margin-bottom: 28px; }
+    .panel-header h2 { font-size: 1.55rem; font-weight: 700; }
+    .panel-header p { font-size: 0.9rem; color: var(--text-muted); margin-top: 6px; line-height: 1.5; }
+
+    /* Cards */
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px 28px; margin-bottom: 20px; box-shadow: var(--shadow-sm); }
+    .card-title { font-size: 1rem; font-weight: 700; margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
+
+    /* Forms */
+    .form-group { margin-bottom: 18px; }
+    .form-label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 7px; }
+    .form-label span { color: var(--danger); margin-left: 3px; }
+    .form-input, .form-textarea, .form-select {
+      width: 100%; padding: 11px 14px; border: 1.5px solid var(--border);
+      border-radius: var(--radius); font-size: 0.93rem; font-family: inherit;
+      color: var(--text); background: var(--surface); transition: border-color 0.18s, box-shadow 0.18s; outline: none;
+    }
+    .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(26,115,232,0.12); }
+    .form-textarea { resize: vertical; min-height: 100px; }
+
+    /* Drop Zone */
+    .photo-drop-zone {
+      border: 2px dashed var(--border); border-radius: var(--radius-lg);
+      padding: 40px 24px; text-align: center; cursor: pointer;
+      transition: all 0.22s; background: var(--surface-alt); position: relative;
+    }
+    .photo-drop-zone:hover, .photo-drop-zone.drag-over { border-color: var(--primary); background: var(--primary-light); }
+    .photo-drop-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+    .drop-icon { font-size: 40px; margin-bottom: 12px; }
+    .drop-title { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
+    .drop-sub { font-size: 0.82rem; color: var(--text-muted); }
+
+    /* Preview Grid */
+    .preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; margin-top: 16px; }
+    .preview-item { position: relative; border-radius: var(--radius); overflow: hidden; border: 2px solid var(--border); aspect-ratio: 1; }
+    .preview-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .preview-remove {
+      position: absolute; top: 5px; right: 5px; background: rgba(234,67,53,0.9);
+      color: white; border: none; border-radius: 50%; width: 24px; height: 24px;
+      font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    .preview-caption-input {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: rgba(0,0,0,0.65); border: none; color: white;
+      font-size: 0.7rem; padding: 4px 6px; font-family: inherit; outline: none; width: 100%;
+    }
+    .preview-caption-input::placeholder { color: rgba(255,255,255,0.7); }
+
+    /* Buttons */
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; border-radius: var(--radius); font-size: 0.92rem; font-weight: 600; font-family: inherit; cursor: pointer; border: none; transition: all 0.18s; }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: var(--shadow); }
+    .btn-success { background: var(--success); color: white; }
+    .btn-success:hover { background: #2d9149; }
+    .btn-danger { background: var(--danger); color: white; }
+    .btn-danger:hover { background: #c62828; }
+    .btn-ghost { background: transparent; color: var(--text-muted); border: 1.5px solid var(--border); }
+    .btn-ghost:hover { background: var(--bg); color: var(--text); }
+    .btn-sm { padding: 7px 14px; font-size: 0.82rem; }
+    .btn-full { width: 100%; justify-content: center; }
+
+    /* Toast */
+    .toast {
+      position: fixed; bottom: 30px; right: 30px;
+      background: var(--success); color: white; padding: 14px 22px;
+      border-radius: var(--radius-lg); font-weight: 600; font-size: 0.92rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18); transform: translateY(80px);
+      opacity: 0; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1); z-index: 1000;
+      display: flex; align-items: center; gap: 10px; max-width: 360px;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast.error { background: var(--danger); }
+
+    /* Item List */
+    .item-list { display: flex; flex-direction: column; gap: 10px; }
+    .item-card { background: var(--surface-alt); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; display: flex; align-items: flex-start; gap: 14px; }
+    .item-card-body { flex: 1; min-width: 0; }
+    .item-card-title { font-weight: 600; font-size: 0.92rem; margin-bottom: 3px; word-break: break-word; }
+    .item-card-meta { font-size: 0.78rem; color: var(--text-muted); }
+    .item-card-actions { display: flex; gap: 6px; flex-shrink: 0; margin-top: 2px; }
+
+    .empty-state { text-align: center; padding: 40px; color: var(--text-muted); }
+    .empty-state .empty-icon { font-size: 40px; margin-bottom: 10px; }
+    .empty-state p { font-size: 0.9rem; }
+
+    /* Badge */
+    .badge { display: inline-block; padding: 2px 10px; border-radius: 99px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; }
+    .badge-blue { background: var(--primary-light); color: var(--primary); }
+    .badge-green { background: var(--success-light); color: var(--success); }
+    .badge-yellow { background: var(--warning-light); color: #c17f00; }
+    .badge-red { background: var(--danger-light); color: var(--danger); }
+
+    /* Stats */
+    .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+    .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; text-align: center; box-shadow: var(--shadow-sm); }
+    .stat-icon { font-size: 28px; margin-bottom: 8px; }
+    .stat-number { font-size: 1.8rem; font-weight: 800; color: var(--primary); }
+    .stat-label { font-size: 0.78rem; color: var(--text-muted); margin-top: 3px; font-weight: 500; }
+
+    /* Login */
+    .login-overlay { position: fixed; inset: 0; background: linear-gradient(135deg, #1a73e8, #0d47a1); display: flex; align-items: center; justify-content: center; z-index: 9999; }
+    .login-box { background: white; border-radius: var(--radius-xl); padding: 48px 40px; width: 100%; max-width: 400px; text-align: center; box-shadow: 0 24px 64px rgba(0,0,0,0.25); }
+    .login-logo { font-size: 52px; margin-bottom: 12px; }
+    .login-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 5px; }
+    .login-sub { font-size: 0.87rem; color: var(--text-muted); margin-bottom: 30px; }
+    .login-error { color: var(--danger); font-size: 0.83rem; margin-top: 10px; display: none; }
+
+    /* Gallery */
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin-top: 16px; }
+    .gallery-thumb { border-radius: var(--radius); overflow: hidden; border: 2px solid var(--border); position: relative; aspect-ratio: 4/3; background: var(--bg); }
+    .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .gallery-thumb-actions { position: absolute; top: 6px; right: 6px; display: flex; gap: 4px; }
+
+    .tag-chip { display: inline-flex; align-items: center; gap: 5px; padding: 4px 12px; border-radius: 99px; font-size: 0.78rem; font-weight: 600; background: var(--primary-light); color: var(--primary); border: 1px solid rgba(26,115,232,0.2); cursor: pointer; user-select: none; transition: all 0.15s; }
+    .tag-chip:hover, .tag-chip.active-chip { background: var(--primary); color: white; }
+
+    @media (max-width: 768px) {
+      .admin-layout { grid-template-columns: 1fr; }
+      .admin-sidebar { display: none; }
+      .admin-main { padding: 16px; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .admin-header { padding: 0 16px; }
+    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-thumb { background: #c0cfe0; border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-box">
+    <div class="login-logo">🏫</div>
+    <div class="login-title">शाळा व्यवस्थापन पॅनेल</div>
+    <div class="login-sub">पीएम श्री जि. प. प्रशाला, गणोरी<br>Admin Panel — Authorized Staff Only</div>
+    <div class="form-group">
+      <input type="password" id="adminPassword" class="form-input" placeholder="🔑 पासवर्ड / Password" style="text-align:center;font-size:1.1rem;letter-spacing:4px;" onkeydown="if(event.key==='Enter') checkPassword()">
+    </div>
+    <button class="btn btn-primary btn-full" onclick="checkPassword()" style="font-size:1rem;padding:13px;">🚪 प्रवेश करा / Login</button>
+    <div class="login-error" id="loginError">❌ चुकीचा पासवर्ड. पुन्हा प्रयत्न करा.</div>
+    <div style="margin-top:20px;font-size:0.75rem;color:var(--text-muted);">
+      Default password: <b>zphs2024</b><br>
+      <span style="color:var(--danger);">⚠️ Settings मध्ये जाऊन बदला!</span>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="admin-header">
+  <div class="admin-header-brand">
+    <div class="admin-header-logo">🏫</div>
+    <div>
+      <div class="admin-header-title">शाळा व्यवस्थापन पॅनेल</div>
+      <div class="admin-header-sub">PM SHRI ZPHS Ganori — Content Management</div>
+    </div>
+  </div>
+  <a href="index.html" target="_blank" class="header-view-btn">👁️ संकेतस्थळ पाहा / View Website</a>
+  <span id="syncBadge" style="display:none;padding:6px 14px;border-radius:99px;font-size:0.78rem;font-weight:700;color:white;margin-left:10px;transition:all 0.3s;"></span>
+</header>
+
+<div class="admin-layout">
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-section-label">मुख्य / Main</div>
+    <div class="sidebar-nav-item active" data-panel="dashboard" onclick="switchPanel('dashboard')"><span class="nav-icon">📊</span> Dashboard</div>
+
+    <div class="sidebar-section-label">सामग्री / Content</div>
+    <div class="sidebar-nav-item" data-panel="announcements" onclick="switchPanel('announcements')"><span class="nav-icon">📢</span> जाहिराती / Announcements</div>
+    <div class="sidebar-nav-item" data-panel="news" onclick="switchPanel('news')"><span class="nav-icon">📰</span> बातम्या / News &amp; Events</div>
+    <div class="sidebar-nav-item" data-panel="gallery" onclick="switchPanel('gallery')"><span class="nav-icon">🖼️</span> फोटो गॅलरी / Gallery</div>
+    <div class="sidebar-nav-item" data-panel="activities" onclick="switchPanel('activities')"><span class="nav-icon">🏆</span> उपक्रम / Activities</div>
+
+    <div class="sidebar-section-label">सेटिंग्ज / Settings</div>
+    <div class="sidebar-nav-item" data-panel="settings" onclick="switchPanel('settings')"><span class="nav-icon">⚙️</span> पासवर्ड बदला</div>
+    <div class="sidebar-nav-item" data-panel="export" onclick="switchPanel('export')"><span class="nav-icon">📤</span> Export / Backup</div>
+
+    <div style="padding:20px;">
+      <button class="btn btn-ghost btn-sm btn-full" onclick="logout()">🚪 Logout</button>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+
+    <!-- DASHBOARD -->
+    <div class="panel active" id="panel-dashboard">
+      <div class="panel-header">
+        <h2>📊 Dashboard — आढावा</h2>
+        <p>शाळेच्या संकेतस्थळावर किती माहिती आहे याचा एकत्रित आढावा.</p>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-icon">📢</div><div class="stat-number" id="statAnn">0</div><div class="stat-label">जाहिराती</div></div>
+        <div class="stat-card"><div class="stat-icon">📰</div><div class="stat-number" id="statNews">0</div><div class="stat-label">बातम्या</div></div>
+        <div class="stat-card"><div class="stat-icon">🖼️</div><div class="stat-number" id="statPhotos">0</div><div class="stat-label">फोटो</div></div>
+        <div class="stat-card"><div class="stat-icon">🏆</div><div class="stat-number" id="statAct">0</div><div class="stat-label">उपक्रम</div></div>
+      </div>
+      <div class="card">
+        <div class="card-title">🚀 त्वरित जोडा / Quick Add</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <button class="btn btn-primary" onclick="switchPanel('announcements')">📢 नवीन जाहिरात</button>
+          <button class="btn btn-success" onclick="switchPanel('gallery')">📸 फोटो अपलोड करा</button>
+          <button class="btn btn-ghost" onclick="switchPanel('news')">📰 बातमी जोडा</button>
+          <button class="btn btn-ghost" onclick="switchPanel('activities')">🏆 उपक्रम जोडा</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">💡 वापर मार्गदर्शन</div>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:0.88rem;line-height:1.6;color:var(--text-muted);">
+          <div>📢 <b>जाहिराती:</b> टिकर बारमध्ये (वरती फिरणारी पट्टी) दिसणाऱ्या नोटिसा येथे टाका.</div>
+          <div>📰 <b>बातम्या:</b> शाळेत झालेले कार्यक्रम, बातम्यांची माहिती जोडा.</div>
+          <div>🖼️ <b>गॅलरी:</b> फोटो अपलोड करा — ते थेट वेबसाइटवर दिसतील.</div>
+          <div>🏆 <b>उपक्रम:</b> नवीन शैक्षणिक उपक्रम, पुरस्कार यांची माहिती जोडा.</div>
+          <div style="color:#c17f00;font-weight:600;">⚠️ हे सर्व या Browser मध्ये साठवले जाते. दुसऱ्या Browser साठी "Export" वापरा.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ANNOUNCEMENTS -->
+    <div class="panel" id="panel-announcements">
+      <div class="panel-header">
+        <h2>📢 जाहिराती व सूचना</h2>
+        <p>या जाहिराती वेबसाइटच्या टिकर बारमध्ये दिसतात.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">➕ नवीन जाहिरात जोडा</div>
+        <div class="form-group">
+          <label class="form-label">जाहिरात मजकूर (मराठी)<span>*</span></label>
+          <input type="text" id="annTextMr" class="form-input" placeholder="उदा: दि. ०५/११ रोजी शालेय वार्षिकोत्सव आयोजित">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Announcement Text (English)</label>
+          <input type="text" id="annTextEn" class="form-input" placeholder="e.g. Annual Day on 05/11 at 10 AM">
+        </div>
+        <div class="form-group">
+          <label class="form-label">प्रकार / Type</label>
+          <select id="annType" class="form-select">
+            <option value="info">ℹ️ माहिती / Info</option>
+            <option value="important">⭐ महत्त्वाचे / Important</option>
+            <option value="alert">🔴 अत्यावश्यक / Urgent</option>
+            <option value="exam">📝 परीक्षा / Exam</option>
+            <option value="holiday">🎉 सुट्टी / Holiday</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" onclick="addAnnouncement()">📢 जाहिरात जोडा</button>
+      </div>
+      <div class="card">
+        <div class="card-title">📋 सध्याच्या जाहिराती</div>
+        <div class="item-list" id="announcementList">
+          <div class="empty-state"><div class="empty-icon">📭</div><p>कोणत्याही जाहिराती नाहीत.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEWS -->
+    <div class="panel" id="panel-news">
+      <div class="panel-header">
+        <h2>📰 बातम्या व कार्यक्रम</h2>
+        <p>शाळेतील महत्त्वाच्या घटना व कार्यक्रमांची माहिती येथे जोडा.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">➕ नवीन बातमी जोडा</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div class="form-group">
+            <label class="form-label">शीर्षक मराठी<span>*</span></label>
+            <input type="text" id="newsTitleMr" class="form-input" placeholder="उदा: राज्यस्तरीय विज्ञान प्रदर्शन">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Title English</label>
+            <input type="text" id="newsTitleEn" class="form-input" placeholder="e.g. State Science Exhibition">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">वर्णन / Description<span>*</span></label>
+          <textarea id="newsDesc" class="form-textarea" placeholder="घटनेचे सविस्तर वर्णन येथे लिहा..."></textarea>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+          <div class="form-group">
+            <label class="form-label">दिनांक / Date</label>
+            <input type="date" id="newsDate" class="form-input">
+          </div>
+          <div class="form-group">
+            <label class="form-label">श्रेणी / Category</label>
+            <select id="newsCategory" class="form-select">
+              <option value="event">🎉 कार्यक्रम</option>
+              <option value="award">🏆 पुरस्कार</option>
+              <option value="exam">📝 परीक्षा</option>
+              <option value="sports">⚽ क्रीडा</option>
+              <option value="cultural">🎭 सांस्कृतिक</option>
+              <option value="academic">📚 शैक्षणिक</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">फोटो (पर्यायी)</label>
+            <input type="file" id="newsPhoto" class="form-input" accept="image/*" style="padding:8px;">
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="addNews()">📰 बातमी जोडा</button>
+      </div>
+      <div class="card">
+        <div class="card-title">📋 बातम्यांची यादी</div>
+        <div class="item-list" id="newsList">
+          <div class="empty-state"><div class="empty-icon">📭</div><p>कोणत्याही बातम्या नाहीत.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GALLERY -->
+    <div class="panel" id="panel-gallery">
+      <div class="panel-header">
+        <h2>🖼️ फोटो गॅलरी व्यवस्थापन</h2>
+        <p>शाळेचे फोटो येथे अपलोड करा. ते वेबसाइटवर गॅलरी विभागात दिसतील.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">📸 फोटो अपलोड करा</div>
+        <div class="form-group">
+          <label class="form-label">अल्बम / Category</label>
+          <select id="galleryCategory" class="form-select">
+            <option value="activities">🏫 शाळा उपक्रम</option>
+            <option value="labs">🔬 प्रयोगशाळा</option>
+            <option value="sports">⚽ क्रीडा</option>
+            <option value="cultural">🎭 सांस्कृतिक</option>
+            <option value="awards">🏆 पुरस्कार</option>
+            <option value="campus">🌳 शाळा परिसर</option>
+            <option value="other">📌 इतर</option>
+          </select>
+        </div>
+        <div class="photo-drop-zone" id="dropZone">
+          <input type="file" id="galleryFileInput" accept="image/*" multiple onchange="handlePhotoSelect(event)">
+          <div class="drop-icon">📸</div>
+          <div class="drop-title">फोटो इथे खेचा किंवा क्लिक करा</div>
+          <div class="drop-sub">Drag &amp; Drop or Click to Select • JPG, PNG, WEBP • अनेक फोटो एकत्र निवडता येतात</div>
+        </div>
+        <div id="photoPreviewGrid" class="preview-grid" style="display:none;"></div>
+        <div id="uploadActions" style="display:none;margin-top:16px;gap:10px;align-items:center;flex-wrap:wrap;">
+          <button class="btn btn-success" onclick="savePhotosToGallery()">💾 गॅलरीत जतन करा</button>
+          <button class="btn btn-ghost" onclick="clearPhotoSelection()">🗑️ रद्द करा</button>
+          <span id="uploadCount" style="font-size:0.85rem;color:var(--text-muted);"></span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">🖼️ जतन केलेले फोटो</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;">
+          <span class="tag-chip active-chip" onclick="filterGallery('all',this)">📋 सर्व</span>
+          <span class="tag-chip" onclick="filterGallery('activities',this)">🏫 उपक्रम</span>
+          <span class="tag-chip" onclick="filterGallery('labs',this)">🔬 लॅब</span>
+          <span class="tag-chip" onclick="filterGallery('sports',this)">⚽ क्रीडा</span>
+          <span class="tag-chip" onclick="filterGallery('cultural',this)">🎭 सांस्कृतिक</span>
+          <span class="tag-chip" onclick="filterGallery('awards',this)">🏆 पुरस्कार</span>
+        </div>
+        <div class="gallery-grid" id="savedGallery">
+          <div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">📷</div><p>अजून कोणते फोटो जतन केलेले नाहीत.</p></div>
+        </div>
+        <div style="margin-top:16px;">
+          <button class="btn btn-danger btn-sm" onclick="clearAllGallery()">🗑️ सर्व फोटो हटवा</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTIVITIES -->
+    <div class="panel" id="panel-activities">
+      <div class="panel-header">
+        <h2>🏆 उपक्रम व पुरस्कार</h2>
+        <p>शाळेतील नवीन उपक्रम, स्पर्धा, पुरस्कार यांची माहिती येथे जोडा.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">➕ नवीन उपक्रम जोडा</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div class="form-group">
+            <label class="form-label">शीर्षक मराठी<span>*</span></label>
+            <input type="text" id="actTitleMr" class="form-input" placeholder="उदा: जिल्हास्तरीय रोबोटिक्स स्पर्धा">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Title English</label>
+            <input type="text" id="actTitleEn" class="form-input" placeholder="e.g. District Robotics Competition">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">माहिती / Details<span>*</span></label>
+          <textarea id="actDesc" class="form-textarea" placeholder="उपक्रमाची सविस्तर माहिती..."></textarea>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div class="form-group">
+            <label class="form-label">दिनांक / Date</label>
+            <input type="date" id="actDate" class="form-input">
+          </div>
+          <div class="form-group">
+            <label class="form-label">श्रेणी / Category</label>
+            <select id="actCategory" class="form-select">
+              <option value="science">🔬 विज्ञान</option>
+              <option value="sports">⚽ क्रीडा</option>
+              <option value="cultural">🎭 सांस्कृतिक</option>
+              <option value="academic">📚 शैक्षणिक</option>
+              <option value="award">🏆 पुरस्कार</option>
+              <option value="community">🤝 समाजसेवा</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">फोटो (पर्यायी)</label>
+          <input type="file" id="actPhoto" class="form-input" accept="image/*" style="padding:8px;">
+        </div>
+        <button class="btn btn-primary" onclick="addActivity()">🏆 उपक्रम जोडा</button>
+      </div>
+      <div class="card">
+        <div class="card-title">📋 उपक्रमांची यादी</div>
+        <div class="item-list" id="activitiesList">
+          <div class="empty-state"><div class="empty-icon">📭</div><p>कोणतेही उपक्रम नाहीत.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="panel" id="panel-settings">
+      <div class="panel-header">
+        <h2>⚙️ सेटिंग्ज / Settings</h2>
+        <p>Admin पासवर्ड बदला.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">🔑 पासवर्ड बदला</div>
+        <div class="form-group">
+          <label class="form-label">सध्याचा पासवर्ड<span>*</span></label>
+          <input type="password" id="currentPass" class="form-input">
+        </div>
+        <div class="form-group">
+          <label class="form-label">नवीन पासवर्ड<span>*</span></label>
+          <input type="password" id="newPass" class="form-input">
+        </div>
+        <div class="form-group">
+          <label class="form-label">नवीन पासवर्ड पुन्हा<span>*</span></label>
+          <input type="password" id="confirmPass" class="form-input">
+        </div>
+        <button class="btn btn-primary" onclick="changePassword()">🔑 पासवर्ड बदला / Save</button>
+      </div>
+    </div>
+
+    <!-- EXPORT -->
+    <div class="panel" id="panel-export">
+      <div class="panel-header">
+        <h2>📤 Export / Backup</h2>
+        <p>आपला सर्व डेटा export करा किंवा restore करा.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">💾 डेटा Download / Backup</div>
+        <p style="font-size:0.87rem;color:var(--text-muted);margin-bottom:16px;">सर्व जाहिराती, बातम्या, उपक्रम यांचा JSON backup download करा. दुसऱ्या Browser मध्ये import करता येतो.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <button class="btn btn-primary" onclick="exportData()">⬇️ Export / Download JSON</button>
+          <button class="btn btn-ghost" onclick="document.getElementById('importFile').click()">⬆️ Import / Restore JSON</button>
+          <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
+        </div>
+      </div>
+      <div class="card" style="border-color:var(--danger);">
+        <div class="card-title" style="color:var(--danger);">⚠️ धोकादायक झोन</div>
+        <p style="font-size:0.87rem;color:var(--text-muted);margin-bottom:16px;">सर्व डेटा कायमचा हटवण्यासाठी हे वापरा.</p>
+        <button class="btn btn-danger" onclick="clearAllData()">🗑️ सर्व डेटा हटवा</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<div class="toast" id="toast">
+  <span id="toastMsg">सफलतापूर्वक जतन केले!</span>
+</div>
+
+<script>
+// ── AUTH ──
+const DEFAULT_PASS = 'zphs2024';
+function getStoredPass() { return localStorage.getItem('zphs_admin_pass') || DEFAULT_PASS; }
+
+function checkPassword() {
+  const val = document.getElementById('adminPassword').value;
+  if (val === getStoredPass()) {
+    document.getElementById('loginOverlay').style.display = 'none';
+    sessionStorage.setItem('zphs_auth', '1');
+    showSyncBadge('syncing');
+    loadAllFromFirebase().then(() => {
+      updateDashboardStats(); renderAllLists();
+      showSyncBadge('synced');
+    });
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+    document.getElementById('adminPassword').value = '';
+    document.getElementById('adminPassword').focus();
+  }
+}
+
+function logout() { sessionStorage.removeItem('zphs_auth'); location.reload(); }
+
+function changePassword() {
+  const cur = document.getElementById('currentPass').value;
+  const np = document.getElementById('newPass').value;
+  const cp = document.getElementById('confirmPass').value;
+  if (cur !== getStoredPass()) { showToast('❌ सध्याचा पासवर्ड चुकीचा!', true); return; }
+  if (!np || np.length < 4) { showToast('❌ नवीन पासवर्ड किमान 4 अक्षरे असावा!', true); return; }
+  if (np !== cp) { showToast('❌ पासवर्ड जुळत नाही!', true); return; }
+  localStorage.setItem('zphs_admin_pass', np);
+  showToast('✅ पासवर्ड यशस्वीरित्या बदलला!');
+  ['currentPass','newPass','confirmPass'].forEach(id => document.getElementById(id).value = '');
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  if (sessionStorage.getItem('zphs_auth') === '1') {
+    document.getElementById('loginOverlay').style.display = 'none';
+    showSyncBadge('syncing');
+    loadAllFromFirebase().then(() => {
+      updateDashboardStats(); renderAllLists();
+      showSyncBadge('synced');
+    });
+  }
+  const dz = document.getElementById('dropZone');
+  dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag-over'); });
+  dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
+  dz.addEventListener('drop', e => {
+    e.preventDefault(); dz.classList.remove('drag-over');
+    const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
+    if (files.length) handleFilesForGallery(files);
+  });
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('newsDate').value = today;
+  document.getElementById('actDate').value = today;
+});
+
+// ── FIREBASE CONFIG ──
+const FIREBASE_URL = 'https://zphs-ganori-default-rtdb.firebaseio.com';
+
+async function syncToFirebase(key, data) {
+  try {
+    showSyncBadge('syncing');
+    await fetch(`${FIREBASE_URL}/${key}.json`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    showSyncBadge('synced');
+  } catch(e) {
+    showSyncBadge('error');
+    console.warn('Firebase sync failed:', e);
+  }
+}
+
+async function loadAllFromFirebase() {
+  const keys = ['announcements','news','gallery','activities'];
+  let loaded = false;
+  for (const key of keys) {
+    try {
+      const res = await fetch(`${FIREBASE_URL}/${key}.json`);
+      const data = await res.json();
+      if (data && Array.isArray(data) && data.length > 0) {
+        localStorage.setItem('zphs_' + key, JSON.stringify(data));
+        loaded = true;
+      }
+    } catch(e) { /* fallback to localStorage */ }
+  }
+  return loaded;
+}
+
+function showSyncBadge(state) {
+  const badge = document.getElementById('syncBadge');
+  if (!badge) return;
+  const states = {
+    syncing: { text:'⏳ Firebase Syncing...', bg:'#f9ab00' },
+    synced:  { text:'☁️ Firebase Synced ✅', bg:'#34a853' },
+    error:   { text:'⚠️ Sync Failed (Local Only)', bg:'#ea4335' }
+  };
+  const s = states[state] || states.synced;
+  badge.textContent = s.text;
+  badge.style.background = s.bg;
+  badge.style.display = 'inline-block';
+  if (state === 'synced') setTimeout(() => { badge.style.display='none'; }, 3000);
+}
+
+// ── DATA LAYER ──
+function getData(key) { try { return JSON.parse(localStorage.getItem('zphs_' + key) || '[]'); } catch { return []; } }
+function setData(key, val) {
+  localStorage.setItem('zphs_' + key, JSON.stringify(val));
+  syncToFirebase(key, val); // 🔥 Sync to Firebase — live for all visitors!
+}
+function genId() { return Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
+function fmtDate(d) { if (!d) return ''; return new Date(d).toLocaleDateString('mr-IN', { day:'2-digit', month:'long', year:'numeric' }); }
+
+// ── DASHBOARD ──
+function updateDashboardStats() {
+  document.getElementById('statAnn').textContent = getData('announcements').length;
+  document.getElementById('statNews').textContent = getData('news').length;
+  document.getElementById('statPhotos').textContent = getData('gallery').length;
+  document.getElementById('statAct').textContent = getData('activities').length;
+}
+function renderAllLists() { renderAnnouncements(); renderNews(); renderGallery(); renderActivities(); }
+
+// ── ANNOUNCEMENTS ──
+const ANN_ICONS = { info:'ℹ️', important:'⭐', alert:'🔴', exam:'📝', holiday:'🎉' };
+const ANN_LABELS = { info:'माहिती', important:'महत्त्वाचे', alert:'अत्यावश्यक', exam:'परीक्षा', holiday:'सुट्टी' };
+const ANN_BADGE = { info:'badge-blue', important:'badge-yellow', alert:'badge-red', exam:'badge-green', holiday:'badge-green' };
+
+function addAnnouncement() {
+  const mr = document.getElementById('annTextMr').value.trim();
+  const en = document.getElementById('annTextEn').value.trim();
+  const type = document.getElementById('annType').value;
+  if (!mr) { showToast('❌ मराठी मजकूर आवश्यक आहे!', true); return; }
+  const all = getData('announcements');
+  all.unshift({ id:genId(), mr, en, type, date:new Date().toISOString() });
+  setData('announcements', all);
+  document.getElementById('annTextMr').value = '';
+  document.getElementById('annTextEn').value = '';
+  renderAnnouncements(); updateDashboardStats();
+  showToast('📢 जाहिरात यशस्वीरित्या जोडली!');
+}
+
+function deleteAnnouncement(id) {
+  if (!confirm('ही जाहिरात हटवायची का?')) return;
+  setData('announcements', getData('announcements').filter(a => a.id !== id));
+  renderAnnouncements(); updateDashboardStats();
+  showToast('🗑️ जाहिरात हटवली!');
+}
+
+function renderAnnouncements() {
+  const list = document.getElementById('announcementList');
+  const all = getData('announcements');
+  if (!all.length) { list.innerHTML = '<div class="empty-state"><div class="empty-icon">📭</div><p>कोणत्याही जाहिराती नाहीत.</p></div>'; return; }
+  list.innerHTML = all.map(a => `
+    <div class="item-card">
+      <div style="font-size:22px;flex-shrink:0;">${ANN_ICONS[a.type]}</div>
+      <div class="item-card-body">
+        <div class="item-card-title">${a.mr}</div>
+        ${a.en ? `<div style="font-size:0.82rem;color:var(--text-muted);margin-top:2px;">${a.en}</div>` : ''}
+        <div class="item-card-meta" style="margin-top:6px;">
+          <span class="badge ${ANN_BADGE[a.type]}">${ANN_LABELS[a.type]}</span>
+          &nbsp; ${fmtDate(a.date)}
+        </div>
+      </div>
+      <div class="item-card-actions">
+        <button class="btn btn-danger btn-sm" onclick="deleteAnnouncement('${a.id}')">🗑️</button>
+      </div>
+    </div>`).join('');
+}
+
+// ── NEWS ──
+const CAT_ICONS = { event:'🎉', award:'🏆', exam:'📝', sports:'⚽', cultural:'🎭', academic:'📚', other:'📌' };
+const CAT_LABELS = { event:'कार्यक्रम', award:'पुरस्कार', exam:'परीक्षा', sports:'क्रीडा', cultural:'सांस्कृतिक', academic:'शैक्षणिक', other:'इतर' };
+
+async function addNews() {
+  const titleMr = document.getElementById('newsTitleMr').value.trim();
+  const desc = document.getElementById('newsDesc').value.trim();
+  if (!titleMr || !desc) { showToast('❌ शीर्षक आणि वर्णन आवश्यक!', true); return; }
+  let photoData = null;
+  const pf = document.getElementById('newsPhoto').files[0];
+  if (pf) photoData = await fileToBase64(pf);
+  const item = { id:genId(), titleMr, titleEn:document.getElementById('newsTitleEn').value.trim(), desc, date:document.getElementById('newsDate').value, cat:document.getElementById('newsCategory').value, photoData, createdAt:new Date().toISOString() };
+  const all = getData('news'); all.unshift(item); setData('news', all);
+  ['newsTitleMr','newsTitleEn','newsDesc'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('newsDate').value = new Date().toISOString().split('T')[0];
+  document.getElementById('newsPhoto').value = '';
+  renderNews(); updateDashboardStats();
+  showToast('📰 बातमी यशस्वीरित्या जोडली!');
+}
+
+function deleteNews(id) {
+  if (!confirm('ही बातमी हटवायची का?')) return;
+  setData('news', getData('news').filter(n => n.id !== id));
+  renderNews(); updateDashboardStats();
+  showToast('🗑️ बातमी हटवली!');
+}
+
+function renderNews() {
+  const list = document.getElementById('newsList');
+  const all = getData('news');
+  if (!all.length) { list.innerHTML = '<div class="empty-state"><div class="empty-icon">📭</div><p>कोणत्याही बातम्या नाहीत.</p></div>'; return; }
+  list.innerHTML = all.map(n => `
+    <div class="item-card">
+      ${n.photoData ? `<img src="${n.photoData}" style="width:60px;height:60px;object-fit:cover;border-radius:8px;flex-shrink:0;">` : `<div style="font-size:28px;flex-shrink:0;">${CAT_ICONS[n.cat]}</div>`}
+      <div class="item-card-body">
+        <div class="item-card-title">${n.titleMr}</div>
+        ${n.titleEn ? `<div style="font-size:0.82rem;color:var(--text-muted);">${n.titleEn}</div>` : ''}
+        <div style="font-size:0.83rem;color:var(--text-muted);margin-top:4px;">${n.desc.slice(0,100)}${n.desc.length>100?'...':''}</div>
+        <div class="item-card-meta" style="margin-top:6px;"><span class="badge badge-blue">${CAT_LABELS[n.cat]}</span> &nbsp; ${fmtDate(n.date)}</div>
+      </div>
+      <div class="item-card-actions">
+        <button class="btn btn-danger btn-sm" onclick="deleteNews('${n.id}')">🗑️</button>
+      </div>
+    </div>`).join('');
+}
+
+// ── GALLERY ──
+let selectedPhotos = [];
+
+function handlePhotoSelect(e) { handleFilesForGallery(Array.from(e.target.files)); }
+
+async function handleFilesForGallery(files) {
+  for (const f of files) {
+    if (!f.type.startsWith('image/')) continue;
+    const b64 = await fileToBase64(f);
+    selectedPhotos.push({ src:b64, caption:f.name.replace(/\.[^.]+$/,''), name:f.name });
+  }
+  renderPhotoPreview();
+}
+
+function renderPhotoPreview() {
+  const grid = document.getElementById('photoPreviewGrid');
+  const actions = document.getElementById('uploadActions');
+  document.getElementById('uploadCount').textContent = `${selectedPhotos.length} फोटो निवडले`;
+  if (!selectedPhotos.length) { grid.style.display='none'; actions.style.display='none'; return; }
+  grid.style.display = 'grid'; actions.style.display = 'flex';
+  grid.innerHTML = selectedPhotos.map((p,i) => `
+    <div class="preview-item">
+      <img src="${p.src}" alt="">
+      <button class="preview-remove" onclick="removeSelectedPhoto(${i})">✕</button>
+      <input class="preview-caption-input" placeholder="Caption..." value="${p.caption}" oninput="selectedPhotos[${i}].caption=this.value">
+    </div>`).join('');
+}
+
+function removeSelectedPhoto(i) { selectedPhotos.splice(i,1); renderPhotoPreview(); }
+function clearPhotoSelection() { selectedPhotos=[]; document.getElementById('galleryFileInput').value=''; renderPhotoPreview(); }
+
+function savePhotosToGallery() {
+  if (!selectedPhotos.length) { showToast('❌ कोणताही फोटो निवडलेला नाही!', true); return; }
+  const cat = document.getElementById('galleryCategory').value;
+  const newPhotos = selectedPhotos.map(p => ({ id:genId(), src:p.src, caption:p.caption||'', cat, date:new Date().toISOString() }));
+  setData('gallery', [...newPhotos, ...getData('gallery')]);
+  selectedPhotos=[]; document.getElementById('galleryFileInput').value='';
+  renderPhotoPreview(); renderGallery(); updateDashboardStats();
+  showToast('✅ ' + newPhotos.length + ' फोटो यशस्वीरित्या जतन केले!');
+}
+
+function deletePhoto(id) {
+  setData('gallery', getData('gallery').filter(p => p.id !== id));
+  renderGallery(); updateDashboardStats();
+  showToast('🗑️ फोटो हटवला!');
+}
+
+function clearAllGallery() {
+  if (!confirm('सर्व फोटो कायमचे हटवायचे का?')) return;
+  setData('gallery',[]); renderGallery(); updateDashboardStats();
+  showToast('🗑️ सर्व फोटो हटवले!');
+}
+
+let currentFilter = 'all';
+function filterGallery(cat, el) {
+  currentFilter = cat;
+  document.querySelectorAll('.tag-chip').forEach(c => c.classList.remove('active-chip'));
+  if (el) el.classList.add('active-chip');
+  renderGallery();
+}
+
+function renderGallery() {
+  const container = document.getElementById('savedGallery');
+  let all = getData('gallery');
+  if (currentFilter !== 'all') all = all.filter(p => p.cat === currentFilter);
+  if (!all.length) { container.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">📷</div><p>या श्रेणीत कोणते फोटो नाहीत.</p></div>'; return; }
+  container.innerHTML = all.map(p => `
+    <div class="gallery-thumb">
+      <img src="${p.src}" alt="${p.caption}" loading="lazy">
+      <div class="gallery-thumb-actions">
+        <button class="btn btn-danger btn-sm" onclick="deletePhoto('${p.id}')" style="padding:3px 8px;font-size:12px;">✕</button>
+      </div>
+      ${p.caption ? `<div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.6);color:white;font-size:0.68rem;padding:4px 6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${p.caption}</div>` : ''}
+    </div>`).join('');
+}
+
+// ── ACTIVITIES ──
+const ACT_ICONS = { science:'🔬', sports:'⚽', cultural:'🎭', academic:'📚', award:'🏆', community:'🤝' };
+const ACT_LABELS = { science:'विज्ञान', sports:'क्रीडा', cultural:'सांस्कृतिक', academic:'शैक्षणिक', award:'पुरस्कार', community:'समाजसेवा' };
+
+async function addActivity() {
+  const titleMr = document.getElementById('actTitleMr').value.trim();
+  const desc = document.getElementById('actDesc').value.trim();
+  if (!titleMr || !desc) { showToast('❌ शीर्षक आणि माहिती आवश्यक!', true); return; }
+  let photoData = null;
+  const pf = document.getElementById('actPhoto').files[0];
+  if (pf) photoData = await fileToBase64(pf);
+  const item = { id:genId(), titleMr, titleEn:document.getElementById('actTitleEn').value.trim(), desc, date:document.getElementById('actDate').value, cat:document.getElementById('actCategory').value, photoData, createdAt:new Date().toISOString() };
+  const all = getData('activities'); all.unshift(item); setData('activities', all);
+  ['actTitleMr','actTitleEn','actDesc'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('actDate').value = new Date().toISOString().split('T')[0];
+  document.getElementById('actPhoto').value = '';
+  renderActivities(); updateDashboardStats();
+  showToast('🏆 उपक्रम यशस्वीरित्या जोडला!');
+}
+
+function deleteActivity(id) {
+  if (!confirm('हा उपक्रम हटवायचा का?')) return;
+  setData('activities', getData('activities').filter(a => a.id !== id));
+  renderActivities(); updateDashboardStats();
+  showToast('🗑️ उपक्रम हटवला!');
+}
+
+function renderActivities() {
+  const list = document.getElementById('activitiesList');
+  const all = getData('activities');
+  if (!all.length) { list.innerHTML = '<div class="empty-state"><div class="empty-icon">📭</div><p>कोणतेही उपक्रम नाहीत.</p></div>'; return; }
+  list.innerHTML = all.map(a => `
+    <div class="item-card">
+      ${a.photoData ? `<img src="${a.photoData}" style="width:60px;height:60px;object-fit:cover;border-radius:8px;flex-shrink:0;">` : `<div style="font-size:28px;flex-shrink:0;">${ACT_ICONS[a.cat]}</div>`}
+      <div class="item-card-body">
+        <div class="item-card-title">${a.titleMr}</div>
+        ${a.titleEn ? `<div style="font-size:0.82rem;color:var(--text-muted);">${a.titleEn}</div>` : ''}
+        <div style="font-size:0.83rem;color:var(--text-muted);margin-top:4px;">${a.desc.slice(0,120)}${a.desc.length>120?'...':''}</div>
+        <div class="item-card-meta" style="margin-top:6px;"><span class="badge badge-green">${ACT_LABELS[a.cat]}</span> &nbsp; ${fmtDate(a.date)}</div>
+      </div>
+      <div class="item-card-actions">
+        <button class="btn btn-danger btn-sm" onclick="deleteActivity('${a.id}')">🗑️</button>
+      </div>
+    </div>`).join('');
+}
+
+// ── EXPORT / IMPORT ──
+function exportData() {
+  const data = { version:'1.0', exportDate:new Date().toISOString(), school:'PM SHRI ZPHS Ganori', announcements:getData('announcements'), news:getData('news'), gallery:getData('gallery'), activities:getData('activities') };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type:'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href=url; a.download='zphs-ganori-backup-'+new Date().toISOString().slice(0,10)+'.json'; a.click();
+  URL.revokeObjectURL(url);
+  showToast('✅ डेटा यशस्वीरित्या export केला!');
+}
+
+function importData(event) {
+  const file = event.target.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (!confirm('Import करायचे का?\n• ' + (data.announcements?.length||0) + ' जाहिराती\n• ' + (data.news?.length||0) + ' बातम्या\n• ' + (data.gallery?.length||0) + ' फोटो\n• ' + (data.activities?.length||0) + ' उपक्रम')) return;
+      if (data.announcements) setData('announcements', data.announcements);
+      if (data.news) setData('news', data.news);
+      if (data.gallery) setData('gallery', data.gallery);
+      if (data.activities) setData('activities', data.activities);
+      renderAllLists(); updateDashboardStats();
+      showToast('✅ डेटा यशस्वीरित्या import केला!');
+    } catch { showToast('❌ JSON file चुकीची आहे!', true); }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+function clearAllData() {
+  if (!confirm('सर्व डेटा कायमचा हटवायचा का?')) return;
+  ['announcements','news','gallery','activities'].forEach(k => setData(k,[]));
+  renderAllLists(); updateDashboardStats();
+  showToast('🗑️ सर्व डेटा हटवला!');
+}
+
+// ── UTILS ──
+function fileToBase64(file) {
+  return new Promise((resolve,reject) => { const r=new FileReader(); r.onload=e=>resolve(e.target.result); r.onerror=reject; r.readAsDataURL(file); });
+}
+
+function switchPanel(panelId) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sidebar-nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('panel-'+panelId).classList.add('active');
+  document.querySelector('[data-panel="'+panelId+'"]').classList.add('active');
+}
+
+let toastTimer;
+function showToast(msg, isError=false) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.className = 'toast' + (isError ? ' error' : '');
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3200);
+}
+</script>
+</body>
+</html>

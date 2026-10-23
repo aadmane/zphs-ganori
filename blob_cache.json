@@ -1,0 +1,198 @@
+{
+  "index.html": {
+    "sha": "7511aba68a697ab192873978310b6dcd2d3690f9",
+    "size": 48310
+  },
+  ".nojekyll": {
+    "sha": "6c5e131ddcd3872b13dbf2824fa8b77043643bbd",
+    "size": 65
+  },
+  ".gitignore": {
+    "sha": "a660fcf5afef55f9a2f1e965aa201854636da27b",
+    "size": 305
+  },
+  "README.md": {
+    "sha": "bcb6d6ca075e326ed7f38fd8aed35d3527fdf141",
+    "size": 6284
+  },
+  "css/style.css": {
+    "sha": "92d5b7afdb1b79b74099b62b713e2ea2107a205a",
+    "size": 43801
+  },
+  "js/main.js": {
+    "sha": "63ed9e03992e7147ddbc9dff33d5a580172d709e",
+    "size": 149043
+  },
+  "images/activity-bicycle-distribution.jpg": {
+    "sha": "5a429e2d9a48a0a152fccbfda74dd04d303a818d",
+    "size": 166680
+  },
+  "images/activity-bird-conservation.jpg": {
+    "sha": "832c91e939503930e4a370c6a826aa260fb6bf09",
+    "size": 183531
+  },
+  "images/activity-cleanliness-swachh.jpg": {
+    "sha": "0b45dd9071bbc40781bac77bbd0b5775a16fec8d",
+    "size": 139987
+  },
+  "images/activity-dignitary-welcome.jpg": {
+    "sha": "aeda8b7050eea2ce794f939e67c5c5d86d03f4c0",
+    "size": 174102
+  },
+  "images/activity-forest-ground-work.jpg": {
+    "sha": "6830290e29e429b3e2eda9a2a298b265071e347c",
+    "size": 175515
+  },
+  "images/activity-merit-cheque-award.jpg": {
+    "sha": "80df420784c3c1981ce07898d9e1050cdb2898bb",
+    "size": 213382
+  },
+  "images/activity-ndrf-disaster-drill.jpg": {
+    "sha": "0e2009933eb71d88d384708fe562766b9676a5b1",
+    "size": 136621
+  },
+  "images/activity-plastic-pen-recycling.jpg": {
+    "sha": "0416e17aab49197da81468f1211dc752a0f7ce18",
+    "size": 150115
+  },
+  "images/activity-school-tradition-nauvari.jpg": {
+    "sha": "1aea294176ba0c19acb27237186028fe98a6f5fa",
+    "size": 191714
+  },
+  "images/activity-street-play-awareness.jpg": {
+    "sha": "7f33422b981f6fc8947a1c5b22cfcbf9be820cbb",
+    "size": 259933
+  },
+  "images/activity-street-play-science.jpg": {
+    "sha": "6f4858502a4903ac42106ab35d9c7163ac266435",
+    "size": 324941
+  },
+  "images/activity-traditional-dance.jpg": {
+    "sha": "a7fadc7bf40e2259158c7a176cd9b0bcc6030697",
+    "size": 158324
+  },
+  "images/activity-tree-plantation-girls.jpg": {
+    "sha": "bc57e5f4fd37cbbc3da9a45bc54d04d576408ffd",
+    "size": 177351
+  },
+  "images/activity-tree-plantation-staff.jpg": {
+    "sha": "bf135d4e3df7b5e088c0a71f44898b337617358a",
+    "size": 160629
+  },
+  "images/ai-lab-classroom.jpg": {
+    "sha": "7e000f5778e12fc5980d5d511160d9238170a492",
+    "size": 101764
+  },
+  "images/ai-lab-cover.jpg": {
+    "sha": "175bee830b61929ceb454bb84d512526fca137f1",
+    "size": 141485
+  },
+  "images/ai-lab-setup.jpg": {
+    "sha": "f3fb75e03af447beadbb63d3f8b46ae659e922a7",
+    "size": 100121
+  },
+  "images/ai-lab-students-hp.jpg": {
+    "sha": "caeca85ddb9cbbb302e346354738aa21f8031fd8",
+    "size": 119644
+  },
+  "images/aniket-mane.jpg": {
+    "sha": "d75d0bcaa910050dde72e613abd52c55fca3bb70",
+    "size": 46452
+  },
+  "images/arts-ganesha-clay-idol.jpg": {
+    "sha": "ce4bb3c11823a13dea70accdda26e33fe7311c67",
+    "size": 211012
+  },
+  "images/arts-rakhi-making.jpg": {
+    "sha": "a5870f99989816cf858336b48d6fa017dc5d85a7",
+    "size": 142119
+  },
+  "images/arts-sculpture-eagle.jpg": {
+    "sha": "ea8e91329377df5feb3da5c3ba1e7ed56c18c5e8",
+    "size": 165547
+  },
+  "images/arts-warli-pot-painting.jpg": {
+    "sha": "d05f67f58ebcff0154a8efb2b32c762606ac6171",
+    "size": 562411
+  },
+  "images/astronomy-binoculars.jpg": {
+    "sha": "d1d26775073804602a9b44f0b28251c052318ec5",
+    "size": 139769
+  },
+  "images/astronomy-lab-overview.jpg": {
+    "sha": "8e3bf4927dabbd77027c8d5d3d414479bcbec802",
+    "size": 901694
+  },
+  "images/astronomy-milkyway-display.jpg": {
+    "sha": "491eb6db803004e76be2a1defa1198495699f906",
+    "size": 1109349
+  },
+  "images/astronomy-outdoor-sun.jpg": {
+    "sha": "6e87459f5700fee5d742e9fe01f7ebc47e1e18fe",
+    "size": 103314
+  },
+  "images/astronomy-telescope-camp.jpg": {
+    "sha": "6e87459f5700fee5d742e9fe01f7ebc47e1e18fe",
+    "size": 103314
+  },
+  "images/astronomy-telescope-guide.jpg": {
+    "sha": "f67391e6544253051797c718bb7b04c0d3125d53",
+    "size": 922042
+  },
+  "images/hm-anil-deshmukh.jpg": {
+    "sha": "a955701176c69e8d72b8702ea7461c2c967fa662",
+    "size": 7400
+  },
+  "images/hm_preview.jpg": {
+    "sha": "685524e2d640ba37a5af09481ac7abf12c24fca0",
+    "size": 8850
+  },
+  "images/multiskill-craft-waste.jpg": {
+    "sha": "b15aa036d572e875bf8dc65cc012937ce91af0dd",
+    "size": 117006
+  },
+  "images/multiskill-fashion-stall.jpg": {
+    "sha": "9b50c8e4346328c5781066a0eec12938cfc27b31",
+    "size": 94523
+  },
+  "images/multiskill-nursery.jpg": {
+    "sha": "76bf5e5e6da519ec0889787886f92085c373f80e",
+    "size": 142562
+  },
+  "images/robotics-3dprinter-assembly.jpg": {
+    "sha": "dc7bfef08dac112de14adb306cc345f718ed1bad",
+    "size": 450285
+  },
+  "images/robotics-rover-test.jpg": {
+    "sha": "d98904737da1f4dae100fe23187a8a9bce89207f",
+    "size": 316495
+  },
+  "images/school-campus-hero.jpg": {
+    "sha": "cdbd22e53097b873a12f7455f53cd5bc5eea1706",
+    "size": 181436
+  },
+  "images/school-poster-reference.jpg": {
+    "sha": "222eed620f11ab55bcbe3728ae6c418f2840eafb",
+    "size": 214743
+  },
+  "images/school_group_photo.jpeg": {
+    "sha": "6b3ec4234b0abddb4a6328cf531feeeb7d8c3b4c",
+    "size": 224544
+  },
+  "images/science-exhibition-stem.jpg": {
+    "sha": "6b3ec4234b0abddb4a6328cf531feeeb7d8c3b4c",
+    "size": 224544
+  },
+  "images/science-mgm-winners.jpg": {
+    "sha": "6e5bb7b6d5f1001b330f3f897228d46a2a014d5e",
+    "size": 297541
+  },
+  "images/science-national-award.jpg": {
+    "sha": "2c077e3fffb12a890ec352930da97af49bf5a5d0",
+    "size": 283900
+  },
+  "images/teacher-suvarna-deshmukh.jpg": {
+    "sha": "9b18bd09445f5a10f7149c3759c5183b8129d14f",
+    "size": 10632
+  }
+}
