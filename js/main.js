@@ -991,6 +991,9 @@ const I18N_DICTIONARY = {
     "top_location": "📍 ता. फुलंब्री, जि. छत्रपती संभाजीनगर",
     "top_hm_phone": "📞 मुख्याध्यापक: +91 9226966376",
     "ticker_label": "ताजी बातमी",
+    "notice_board_tag": "📢 महत्त्वाची सूचना व जाहिराती · Live Updates",
+    "notice_board_title": "शालेय सूचना फलक व ताज्या जाहिराती",
+    "notice_board_desc": "प्रवेश, परीक्षा, सुट्ट्या, क्रीडा व शालेय उपक्रमांशी संबंधित अधिकृत सूचना व जाहिराती",
     "brand_motto": "॥ दृढ प्रयत्नेन सिद्ध्यते ॥",
     "brand_title": "पीएम श्री जि. प. प्रशाला, गणोरी",
     "brand_sub": "प्राथमिक, उच्च प्राथमिक, माध्यमिक व उच्च माध्यमिक शिक्षण संकुल",
@@ -1123,6 +1126,9 @@ const I18N_DICTIONARY = {
     "top_location": "📍 Tal. Phulambri, Dist. Chhatrapati Sambhajinagar",
     "top_hm_phone": "📞 Headmaster: +91 9226966376",
     "ticker_label": "Latest News",
+    "notice_board_tag": "📢 Announcements & Notices · Live Updates",
+    "notice_board_title": "School Notice Board & Announcements",
+    "notice_board_desc": "Official announcements regarding admissions, examinations, holidays, sports, and school activities",
     "brand_motto": "॥ दृढ प्रयत्नेन सिद्ध्यते ॥",
     "brand_title": "PM SHRI Z. P. Prashala, Ganori",
     "brand_sub": "Primary, Upper Primary, Secondary & Higher Secondary Education Complex",
@@ -1276,6 +1282,7 @@ const NEWS_ITEMS_EN = [
 // =============================================================================
 document.addEventListener('DOMContentLoaded', () => {
   initLiveTicker();
+  renderNoticeBoard();
   initThemeToggle();
   initLanguageToggle();
   initMobileNav();
@@ -1290,20 +1297,132 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // -----------------------------------------------------------------------------
-// Live News Ticker
+// Shared Admin Data Accessor
 // -----------------------------------------------------------------------------
+function getAdminData(key) {
+  try {
+    const raw = localStorage.getItem('zphs_' + key);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed)) return parsed.filter(Boolean);
+    if (parsed && typeof parsed === 'object') return Object.values(parsed).filter(Boolean);
+    return [];
+  } catch (e) {
+    return [];
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Live News & Announcements Ticker
+// -----------------------------------------------------------------------------
+function getLiveTickerItems() {
+  const lang = (typeof currentLang !== 'undefined' ? currentLang : (document.documentElement.lang || 'mr'));
+  const ANN_ICONS = { info: 'ℹ️', important: '⭐', alert: '🔴', exam: '📝', holiday: '🎉' };
+  const ANN_LABELS_MR = { info: 'माहिती', important: 'महत्त्वाचे', alert: 'अत्यावश्यक', exam: 'परीक्षा', holiday: 'सुट्टी' };
+  const ANN_LABELS_EN = { info: 'Info', important: 'Important', alert: 'Urgent', exam: 'Exam', holiday: 'Holiday' };
+
+  const adminAnns = getAdminData('announcements');
+  const annItems = adminAnns.map(a => {
+    const icon = ANN_ICONS[a.type] || '📢';
+    const badgeLabel = (lang === 'en' ? (ANN_LABELS_EN[a.type] || 'Notice') : (ANN_LABELS_MR[a.type] || 'सूचना'));
+    const text = (lang === 'en' && a.en) ? a.en : (a.mr || a.en || '');
+    return `<span class="ticker-item ticker-item-announcement"><span class="ticker-badge ticker-badge-${a.type || 'info'}">${icon} ${badgeLabel}</span> ${escapeHtml(text)}</span>`;
+  });
+
+  const newsItems = (lang === 'en' ? NEWS_ITEMS_EN : NEWS_ITEMS_MR).map(item => `<span class="ticker-item">${item}</span>`);
+
+  return [...annItems, ...newsItems];
+}
+
 function initLiveTicker() {
   const marquee = document.getElementById('tickerMarquee');
   if (!marquee) return;
 
-  const newsItems = currentLang === 'mr' ? NEWS_ITEMS_MR : NEWS_ITEMS_EN;
+  const allItems = getLiveTickerItems();
+  if (!allItems.length) return;
 
-  // Repeat for continuous marquee
-  const fullHtml = [...newsItems, ...newsItems].map(item => `
-    <span class="ticker-item">${item}</span>
-  `).join('');
+  // Seamless continuous marquee loop (duplicate for 0% to -50% translate)
+  marquee.innerHTML = [...allItems, ...allItems].join('');
+}
 
-  marquee.innerHTML = fullHtml;
+// -----------------------------------------------------------------------------
+// School Notice Board & Urgent Alert Banner
+// -----------------------------------------------------------------------------
+function renderNoticeBoard() {
+  const container = document.getElementById('noticeBoardContainer');
+  const alertBanner = document.getElementById('urgentAlertBanner');
+  const alertText = document.getElementById('urgentAlertText');
+
+  const adminAnns = getAdminData('announcements');
+  const lang = (typeof currentLang !== 'undefined' ? currentLang : (document.documentElement.lang || 'mr'));
+
+  const ANN_ICONS = { info: 'ℹ️', important: '⭐', alert: '🔴', exam: '📝', holiday: '🎉' };
+  const ANN_LABELS_MR = { info: 'माहिती', important: 'महत्त्वाचे', alert: 'अत्यावश्यक', exam: 'परीक्षा', holiday: 'सुट्टी' };
+  const ANN_LABELS_EN = { info: 'Info', important: 'Important', alert: 'Urgent Notice', exam: 'Exam', holiday: 'Holiday' };
+  const ANN_CLASS = { info: 'notice-card-info', important: 'notice-card-important', alert: 'notice-card-alert', exam: 'notice-card-exam', holiday: 'notice-card-holiday' };
+
+  // Check for any urgent alert announcement
+  const urgentNotice = adminAnns.find(a => a.type === 'alert');
+  if (alertBanner && alertText) {
+    if (urgentNotice) {
+      const uText = (lang === 'en' && urgentNotice.en) ? urgentNotice.en : urgentNotice.mr;
+      alertText.innerHTML = `<strong>${lang === 'en' ? '🚨 URGENT NOTICE:' : '🚨 अत्यावश्यक सूचना:'}</strong> ${escapeHtml(uText)}`;
+      alertBanner.style.display = 'block';
+    } else {
+      alertBanner.style.display = 'none';
+    }
+  }
+
+  if (!container) return;
+
+  if (!adminAnns.length) {
+    // Show high-value school highlights as default notice cards
+    container.innerHTML = `
+      <div class="notice-card notice-card-default">
+        <div class="notice-card-top">
+          <span class="notice-badge notice-badge-gold">⭐ ${lang === 'en' ? 'Admissions Open' : 'प्रवेश सुरू २०२६-२७'}</span>
+          <span class="notice-date">📅 ${lang === 'en' ? 'Active' : 'सुरू आहे'}</span>
+        </div>
+        <h3 class="notice-card-title">${lang === 'en' ? 'Admissions open for Std 5th to 12th (Arts & Science)' : 'इ. ५ वी ते १२ वी (कला व विज्ञान) प्रवेश सुरू'}</h3>
+        <p class="notice-card-desc">${lang === 'en' ? 'Free state-of-the-art education, 10 advanced laboratories, AI Lab, NSQF skill courses, and 700-tree green campus.' : 'मोफत गुणवत्तापूर्ण शिक्षण, १० प्रयोगशाळा, राज्यातील पहिली AI लॅब, ऑटोमोबाईल व कौशल्य अभ्यासक्रम आणि मोफत शासकीय सुविधा.'}</p>
+        <div class="notice-card-footer">
+          <a href="#contact" class="notice-link">📞 ${lang === 'en' ? 'Contact for Admission' : 'प्रवेशासाठी संपर्क'} ➔</a>
+        </div>
+      </div>
+      <div class="notice-card notice-card-info">
+        <div class="notice-card-top">
+          <span class="notice-badge notice-badge-blue">🤖 ${lang === 'en' ? 'AI Lab Operational' : 'पहिली AI लॅब'}</span>
+          <span class="notice-date">📅 ${lang === 'en' ? 'Ongoing' : 'सत्र २०२५-२६'}</span>
+        </div>
+        <h3 class="notice-card-title">${lang === 'en' ? 'Maharashtra’s 1st State School AI Lab at Ganori' : 'महाराष्ट्रातील १ ली शालेय AI लॅब गणोरी प्रशालेत कार्यरत'}</h3>
+        <p class="notice-card-desc">${lang === 'en' ? 'Hands-on Artificial Intelligence, Robotics, and Python training for all students in grades 6-12.' : 'HP India Foundation व SCERT पुणे यांच्या सहकार्याने आधुनिक तंत्रज्ञान व कोडिंगचे मोफत प्रशिक्षण.'}</p>
+        <div class="notice-card-footer">
+          <a href="#labs" class="notice-link">🔬 ${lang === 'en' ? 'Explore Labs' : 'प्रयोगशाळा पहा'} ➔</a>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = adminAnns.map(a => {
+    const icon = ANN_ICONS[a.type] || '📢';
+    const badgeLabel = (lang === 'en' ? (ANN_LABELS_EN[a.type] || 'Notice') : (ANN_LABELS_MR[a.type] || 'सूचना'));
+    const titleText = (lang === 'en' && a.en) ? a.en : a.mr;
+    const subText = (lang === 'en' ? a.mr : a.en) || '';
+    const dateFormatted = a.date ? new Date(a.date).toLocaleDateString(lang === 'en' ? 'en-IN' : 'mr-IN', { day: '2-digit', month: 'short', year: 'numeric' }) : '';
+    const cardClass = ANN_CLASS[a.type] || 'notice-card-info';
+
+    return `
+      <div class="notice-card ${cardClass}">
+        <div class="notice-card-top">
+          <span class="notice-badge notice-badge-${a.type || 'info'}">${icon} ${badgeLabel}</span>
+          ${dateFormatted ? `<span class="notice-date">📅 ${dateFormatted}</span>` : ''}
+        </div>
+        <h3 class="notice-card-title">${escapeHtml(titleText)}</h3>
+        ${subText && subText !== titleText ? `<p class="notice-card-desc">${escapeHtml(subText)}</p>` : ''}
+      </div>
+    `;
+  }).join('');
 }
 
 // -----------------------------------------------------------------------------
@@ -1413,6 +1532,7 @@ function setLanguage(lang) {
 
   // Re-render dynamic components with chosen language
   initLiveTicker();
+  renderNoticeBoard();
   renderLabs(currentLabIndex);
   renderActivities(currentActivityFilter);
   renderStaff();
@@ -2200,30 +2320,58 @@ function escapeHtml(str) {
     footer.appendChild(adminLink);
   }
 
-  // ── 5. Fetch Live Data from Firebase RTDB ──
+  // ── 5. Fetch Live Data from Firebase RTDB (Parallel & Safe) ──
   const FIREBASE_URL = 'https://zphs-ganori-default-rtdb.firebaseio.com';
 
   async function fetchFromFirebase() {
     const keys = ['announcements', 'news', 'gallery', 'activities'];
-    for (const key of keys) {
+    const promises = keys.map(async (key) => {
       try {
-        const res = await fetch(`${FIREBASE_URL}/${key}.json`);
+        const res = await fetch(`${FIREBASE_URL}/${key}.json?t=${Date.now()}`, { cache: 'no-store' });
+        if (!res.ok) return;
         const data = await res.json();
-        if (data && Array.isArray(data) && data.length > 0) {
-          localStorage.setItem('zphs_' + key, JSON.stringify(data));
+        if (data !== null) {
+          let arr = [];
+          if (Array.isArray(data)) arr = data.filter(Boolean);
+          else if (typeof data === 'object') arr = Object.values(data).filter(Boolean);
+          localStorage.setItem('zphs_' + key, JSON.stringify(arr));
         }
-      } catch(e) { /* use localStorage fallback */ }
-    }
+      } catch (e) {
+        /* network/offline fallback to localStorage */
+      }
+    });
+
+    await Promise.allSettled(promises);
   }
 
-  // ── Run after page loads — Firebase first, then render ──
+  // ── Run after page loads — Instant cache render, then live Firebase update ──
   async function runCMSIntegration() {
-    await fetchFromFirebase(); // 🔥 Get live data from Firebase
-    injectAdminAnnouncements();
+    // 1. Initial immediate render from localStorage (zero delay)
+    initLiveTicker();
+    renderNoticeBoard();
     injectAdminNewsSection();
     injectAdminGallery();
     addAdminLink();
+
+    // 2. Parallel background fetch from Firebase cloud
+    await fetchFromFirebase();
+
+    // 3. Live update once cloud data arrives
+    initLiveTicker();
+    renderNoticeBoard();
+    injectAdminNewsSection();
+    injectAdminGallery();
   }
+
+  // ── Instant Live Sync across open browser tabs ──
+  window.addEventListener('storage', (e) => {
+    if (e.key && e.key.startsWith('zphs_')) {
+      initLiveTicker();
+      renderNoticeBoard();
+      injectAdminNewsSection();
+      injectAdminGallery();
+    }
+  });
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => runCMSIntegration());

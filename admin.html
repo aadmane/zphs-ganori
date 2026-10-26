@@ -242,9 +242,11 @@
       <div class="admin-header-title">शाळा व्यवस्थापन पॅनेल</div>
       <div class="admin-header-sub">PM SHRI ZPHS Ganori — Content Management</div>
     </div>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <button class="btn btn-secondary btn-sm" onclick="syncAllNow()" title="सर्व डेटा Firebase वर अपलोड व सिंक करा" style="cursor:pointer;padding:8px 14px;border-radius:8px;font-weight:600;">🔄 Cloud Sync</button>
+    <a href="index.html" target="_blank" class="header-view-btn">👁️ संकेतस्थळ पाहा / View Website</a>
+    <span id="syncBadge" style="display:none;padding:6px 14px;border-radius:99px;font-size:0.78rem;font-weight:700;color:white;margin-left:10px;transition:all 0.3s;"></span>
   </div>
-  <a href="index.html" target="_blank" class="header-view-btn">👁️ संकेतस्थळ पाहा / View Website</a>
-  <span id="syncBadge" style="display:none;padding:6px 14px;border-radius:99px;font-size:0.78rem;font-weight:700;color:white;margin-left:10px;transition:all 0.3s;"></span>
 </header>
 
 <div class="admin-layout">
@@ -310,7 +312,7 @@
         <p>या जाहिराती वेबसाइटच्या टिकर बारमध्ये दिसतात.</p>
       </div>
       <div class="card">
-        <div class="card-title">➕ नवीन जाहिरात जोडा</div>
+        <div class="card-title" id="annFormTitle">➕ नवीन जाहिरात जोडा</div>
         <div class="form-group">
           <label class="form-label">जाहिरात मजकूर (मराठी)<span>*</span></label>
           <input type="text" id="annTextMr" class="form-input" placeholder="उदा: दि. ०५/११ रोजी शालेय वार्षिकोत्सव आयोजित">
@@ -329,7 +331,10 @@
             <option value="holiday">🎉 सुट्टी / Holiday</option>
           </select>
         </div>
-        <button class="btn btn-primary" onclick="addAnnouncement()">📢 जाहिरात जोडा</button>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <button class="btn btn-primary" id="btnSaveAnnouncement" onclick="saveAnnouncement()">📢 जाहिरात जोडा</button>
+          <button class="btn btn-secondary" id="btnCancelEditAnn" onclick="cancelEditAnnouncement()" style="display:none;">रद्द करा (Cancel)</button>
+        </div>
       </div>
       <div class="card">
         <div class="card-title">📋 सध्याच्या जाहिराती</div>
@@ -614,11 +619,12 @@ const FIREBASE_URL = 'https://zphs-ganori-default-rtdb.firebaseio.com';
 async function syncToFirebase(key, data) {
   try {
     showSyncBadge('syncing');
-    await fetch(`${FIREBASE_URL}/${key}.json`, {
+    const res = await fetch(`${FIREBASE_URL}/${key}.json`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
     showSyncBadge('synced');
   } catch(e) {
     showSyncBadge('error');
@@ -631,15 +637,42 @@ async function loadAllFromFirebase() {
   let loaded = false;
   for (const key of keys) {
     try {
-      const res = await fetch(`${FIREBASE_URL}/${key}.json`);
+      const res = await fetch(`${FIREBASE_URL}/${key}.json?t=${Date.now()}`);
+      if (!res.ok) continue;
       const data = await res.json();
-      if (data && Array.isArray(data) && data.length > 0) {
-        localStorage.setItem('zphs_' + key, JSON.stringify(data));
+      if (data !== null) {
+        let arr = [];
+        if (Array.isArray(data)) arr = data.filter(Boolean);
+        else if (typeof data === 'object') arr = Object.values(data).filter(Boolean);
+        localStorage.setItem('zphs_' + key, JSON.stringify(arr));
         loaded = true;
       }
     } catch(e) { /* fallback to localStorage */ }
   }
   return loaded;
+}
+
+async function syncAllNow() {
+  showSyncBadge('syncing');
+  const keys = ['announcements','news','gallery','activities'];
+  let errCount = 0;
+  for (const k of keys) {
+    try {
+      const res = await fetch(`${FIREBASE_URL}/${k}.json`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(getData(k))
+      });
+      if (!res.ok) errCount++;
+    } catch(e) { errCount++; }
+  }
+  if (errCount === 0) {
+    showSyncBadge('synced');
+    showToast('☁️ सर्व डेटा Firebase वर यशस्वीरित्या सिंक झाला!');
+  } else {
+    showSyncBadge('error');
+    showToast('⚠️ सिंक करताना अडचण आली, कृपया इंटरनेट तपासा.', true);
+  }
 }
 
 function showSyncBadge(state) {
@@ -680,22 +713,65 @@ const ANN_ICONS = { info:'ℹ️', important:'⭐', alert:'🔴', exam:'📝', h
 const ANN_LABELS = { info:'माहिती', important:'महत्त्वाचे', alert:'अत्यावश्यक', exam:'परीक्षा', holiday:'सुट्टी' };
 const ANN_BADGE = { info:'badge-blue', important:'badge-yellow', alert:'badge-red', exam:'badge-green', holiday:'badge-green' };
 
-function addAnnouncement() {
+let editingAnnId = null;
+
+function editAnnouncement(id) {
+  const all = getData('announcements');
+  const item = all.find(a => a.id === id);
+  if (!item) return;
+  editingAnnId = id;
+  document.getElementById('annTextMr').value = item.mr || '';
+  document.getElementById('annTextEn').value = item.en || '';
+  document.getElementById('annType').value = item.type || 'info';
+
+  document.getElementById('btnSaveAnnouncement').textContent = '💾 जाहिरात अपडेट करा';
+  document.getElementById('btnCancelEditAnn').style.display = 'inline-block';
+  document.getElementById('annFormTitle').textContent = '✏️ जाहिरात संपादित करा (Edit Announcement)';
+  document.getElementById('annTextMr').focus();
+}
+
+function cancelEditAnnouncement() {
+  editingAnnId = null;
+  document.getElementById('annTextMr').value = '';
+  document.getElementById('annTextEn').value = '';
+  document.getElementById('annType').value = 'info';
+  document.getElementById('btnSaveAnnouncement').textContent = '📢 जाहिरात जोडा';
+  document.getElementById('btnCancelEditAnn').style.display = 'none';
+  document.getElementById('annFormTitle').textContent = '➕ नवीन जाहिरात जोडा';
+}
+
+function saveAnnouncement() {
   const mr = document.getElementById('annTextMr').value.trim();
   const en = document.getElementById('annTextEn').value.trim();
   const type = document.getElementById('annType').value;
   if (!mr) { showToast('❌ मराठी मजकूर आवश्यक आहे!', true); return; }
-  const all = getData('announcements');
-  all.unshift({ id:genId(), mr, en, type, date:new Date().toISOString() });
+
+  let all = getData('announcements');
+  if (editingAnnId) {
+    all = all.map(a => a.id === editingAnnId ? { ...a, mr, en, type, updatedDate: new Date().toISOString() } : a);
+    editingAnnId = null;
+    cancelEditAnnouncement();
+    showToast('✅ जाहिरात यशस्वीरित्या अपडेट केली!');
+  } else {
+    all.unshift({ id: genId(), mr, en, type, date: new Date().toISOString() });
+    document.getElementById('annTextMr').value = '';
+    document.getElementById('annTextEn').value = '';
+    showToast('📢 नवीन जाहिरात यशस्वीरित्या जोडली!');
+  }
+
   setData('announcements', all);
-  document.getElementById('annTextMr').value = '';
-  document.getElementById('annTextEn').value = '';
-  renderAnnouncements(); updateDashboardStats();
-  showToast('📢 जाहिरात यशस्वीरित्या जोडली!');
+  renderAnnouncements();
+  updateDashboardStats();
+}
+
+// Backward compatibility alias
+function addAnnouncement() {
+  saveAnnouncement();
 }
 
 function deleteAnnouncement(id) {
   if (!confirm('ही जाहिरात हटवायची का?')) return;
+  if (editingAnnId === id) cancelEditAnnouncement();
   setData('announcements', getData('announcements').filter(a => a.id !== id));
   renderAnnouncements(); updateDashboardStats();
   showToast('🗑️ जाहिरात हटवली!');
@@ -716,8 +792,9 @@ function renderAnnouncements() {
           &nbsp; ${fmtDate(a.date)}
         </div>
       </div>
-      <div class="item-card-actions">
-        <button class="btn btn-danger btn-sm" onclick="deleteAnnouncement('${a.id}')">🗑️</button>
+      <div class="item-card-actions" style="display:flex;gap:6px;">
+        <button class="btn btn-secondary btn-sm" onclick="editAnnouncement('${a.id}')" title="संपादित करा">✏️</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteAnnouncement('${a.id}')" title="हटवा">🗑️</button>
       </div>
     </div>`).join('');
 }

@@ -101,6 +101,15 @@
   </header>
 
   <main>
+    <!-- High-Priority Urgent Announcement Alert Banner (Shown dynamically when type='alert') -->
+    <div id="urgentAlertBanner" style="display:none;" class="urgent-alert-banner" role="alert">
+      <div class="container urgent-alert-content">
+        <span class="urgent-alert-icon">🚨</span>
+        <div class="urgent-alert-text" id="urgentAlertText"></div>
+        <button class="urgent-alert-close" onclick="document.getElementById('urgentAlertBanner').style.display='none'" aria-label="Close Alert">✕</button>
+      </div>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero-section" id="home">
       <div class="container hero-grid">
@@ -189,6 +198,28 @@
         <div class="stat-item">
           <div class="stat-number" data-count="53" data-suffix=" वर्षे">0</div>
           <div class="stat-label" data-i18n="stat_label_6">ऐतिहासिक राष्ट्रीय विज्ञान निवड</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dedicated School Notice Board & Announcements Section -->
+    <section class="section section-announcements" id="notice-board-section">
+      <div class="container">
+        <div class="notice-board-header">
+          <div class="notice-board-pill">
+            <span class="notice-pulse-dot"></span>
+            <span data-i18n="notice_board_tag">📢 महत्त्वाची सूचना व जाहिराती · Live Updates</span>
+          </div>
+          <h2 class="section-title notice-board-title" data-i18n="notice_board_title">
+            शालेय सूचना फलक व ताज्या जाहिराती
+          </h2>
+          <p class="section-description" data-i18n="notice_board_desc">
+            प्रवेश, परीक्षा, सुट्ट्या, क्रीडा व शालेय उपक्रमांशी संबंधित अधिकृत सूचना व जाहिराती
+          </p>
+        </div>
+
+        <div id="noticeBoardContainer" class="notice-board-grid">
+          <!-- Injected dynamically via JS from Admin Panel / Firebase -->
         </div>
       </div>
     </section>
